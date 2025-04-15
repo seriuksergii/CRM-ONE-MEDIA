@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import '../../styles/authStyles.css';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../api/api';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     handleSubmit,
@@ -19,8 +25,15 @@ const LoginPage = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data) => {
-    console.log('Submitted data:', data);
+  const onSubmit = async (data) => {
+    console.log('Submitted login data:', data);
+    const result = await dispatch(loginUser(data));
+
+    if (loginUser.fulfilled.match(result)) {
+      navigate('/dashboard');
+    } else {
+      console.log('Login failed:', result.payload);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -36,10 +49,18 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form_group">
             <label htmlFor="email">Email</label>
-            <input id="email" type="email" placeholder="Введите E-mail" />
-            {errors.email && (
-              <p className="error_message">{errors.email.message}</p>
-            )}
+            <input
+              id="email"
+              type="email"
+              placeholder="Введите E-mail"
+              {...register('email', {
+                required: 'Поле email обязательно',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Некорректный формат email',
+                },
+              })}
+            />
           </div>
 
           <div className="form_group password_group">

@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import './RegisterPage.css';
 import '../../styles/authStyles.css';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../api/api';
 
 const RegisterPage = () => {
+  const dispatch = useDispatch();
+  
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const {
@@ -24,7 +28,8 @@ const RegisterPage = () => {
   });
 
   const onSubmit = (data) => {
-    console.log('Submitted data:', data);
+    const payload = { ...data, role: 'user' };
+    dispatch(registerUser(payload));
   };
 
   const togglePasswordVisibility = () => {
