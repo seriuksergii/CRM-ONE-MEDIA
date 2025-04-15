@@ -115,8 +115,8 @@ const RegisterPage = () => {
                     message: 'Пароль должен содержать буквы и цифры',
                   },
                   minLength: {
-                    value: 3,
-                    message: 'Пароль должен быть больше 3 символов',
+                    value: 8,
+                    message: 'Пароль должен быть больше 8 символов',
                   },
                   maxLength: {
                     value: 20,

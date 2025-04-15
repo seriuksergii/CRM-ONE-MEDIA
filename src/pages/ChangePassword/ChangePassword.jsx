@@ -70,8 +70,8 @@ const ChangePassword = () => {
   const newPasswordValidation = {
     required: 'Это поле обязательно',
     minLength: {
-      value: 6,
-      message: 'Минимум 6 символов'
+      value: 8,
+      message: 'Минимум 8 символов'
     },
     pattern: {
       value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
