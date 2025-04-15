@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/authStyles.css';
 import { useDispatch } from 'react-redux';
 import { changePassword } from '../../api/api';
+import './ChangePassword.css';
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
@@ -46,13 +47,13 @@ const ChangePassword = () => {
         confirmPassword: data.confirmPassword
       })).unwrap();
 
-      setSuccessMessage('Пароль успішно змінено!');
+      setSuccessMessage('Пароль успешно изменен!');
       setTimeout(() => navigate('/dashboard'), 1500);
     } catch (error) {
-      if (error === 'Необхідна авторизація') {
+      if (error === 'Требуется авторизация') {
         navigate('/login');
       } else {
-        setError(error || 'Помилка при зміні паролю');
+        setError(error || 'Ошибка при изменении пароля');
       }
     } finally {
       setIsLoading(false);
@@ -67,36 +68,36 @@ const ChangePassword = () => {
   }, []);
 
   const newPasswordValidation = {
-    required: 'Це поле обов\'язкове',
+    required: 'Это поле обязательно',
     minLength: {
       value: 6,
-      message: 'Мінімум 6 символів'
+      message: 'Минимум 6 символов'
     },
     pattern: {
       value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-      message: 'Пароль має містити літери та цифри'
+      message: 'Пароль должен содержать буквы и цифры'
     }
   };
 
   const confirmPasswordValidation = {
-    required: 'Це поле обов\'язкове',
-    validate: value => value === newPassword || 'Паролі не збігаються'
+    required: 'Это поле обязательно',
+    validate: value => value === newPassword || 'Пароли не совпадают'
   };
 
   return (
     <div className="login_page">
       <img src="/Mask group.png" alt="logo" className="logo" />
-      <h1 className="login_title">Зміна паролю</h1>
-      <h3>Будь ласка, введіть новий пароль</h3>
+      <h1 className="login_title">Изменение пароля</h1>
+      <h3>Пожалуйста, введите новый пароль</h3>
       
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form_group password_group">
-          <label htmlFor="newPassword">Новий пароль</label>
+          <label htmlFor="newPassword">Новый пароль</label>
           <div className="password_input_wrapper">
             <input
               id="newPassword"
               type={showPasswords.new ? 'text' : 'password'}
-              placeholder="Введіть новий пароль"
+              placeholder="Введите новый пароль"
               {...register('newPassword', newPasswordValidation)}
             />
             <div 
@@ -112,12 +113,12 @@ const ChangePassword = () => {
         </div>
 
         <div className="form_group password_group">
-          <label htmlFor="confirmPassword">Підтвердіть пароль</label>
+          <label htmlFor="confirmPassword">Подтвердите пароль</label>
           <div className="password_input_wrapper">
             <input
               id="confirmPassword"
               type={showPasswords.confirm ? 'text' : 'password'}
-              placeholder="Повторіть новий пароль"
+              placeholder="Повторите новый пароль"
               {...register('confirmPassword', confirmPasswordValidation)}
             />
             <div 
@@ -135,13 +136,13 @@ const ChangePassword = () => {
         {error && <p className="error_message">{error}</p>}
         {successMessage && <p className="success_message">{successMessage}</p>}
 
-        <div className="enter_button">
+        <div className="change_password_button">
           <button 
             type="submit" 
             className="enter_button_text"
             disabled={isLoading || !isValid}
           >
-            {isLoading ? 'Зміна...' : 'Змінити пароль'}
+            {isLoading ? 'Изменение...' : 'Изменить пароль'}
           </button>
         </div>
       </form>
