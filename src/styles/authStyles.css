@@ -93,6 +93,9 @@ form input {
   margin: -4px 0 4px 0;
   padding-top: 10px;
 }
+.enter_button_link {
+  text-decoration: none;
+}
 .enter_button {
   display: flex;
   justify-content: space-between;
@@ -101,7 +104,7 @@ form input {
   border-radius: 38px;
 }
 
-.enter_button p {
+.enter_button_p {
   font: 400 14px/150% 'Mulish', sans-serif;
   color: #121311;
 }

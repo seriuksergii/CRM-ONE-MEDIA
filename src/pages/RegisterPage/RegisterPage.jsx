@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 import '../../styles/authStyles.css';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../api/api';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+  const [registerError, setRegisterError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     handleSubmit,
     register,
@@ -27,9 +31,28 @@ const RegisterPage = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data) => {
-    const payload = { ...data, role: 'user' };
-    dispatch(registerUser(payload));
+  const onSubmit = async (data) => {
+    setRegisterError(null);
+    setIsLoading(true);
+
+    const payload = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: 'user',
+    };
+
+    try {
+      const result = await dispatch(registerUser(payload));
+
+      if (registerUser.fulfilled.match(result)) {
+        navigate('/dashboard');
+      } else {
+        setRegisterError(result.payload || 'Registration failed');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -48,10 +71,18 @@ const RegisterPage = () => {
         <img src="/Mask group.png" alt="logo" className="logo" />
         <h1 className="login_title">Регистрация</h1>
         <h3>Пожалуйста, введите свои данные</h3>
+
+        {registerError && <div className="error-message">{registerError}</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form_group">
             <label htmlFor="email">Email</label>
-            <input id="email" type="email" placeholder="Введите E-mail" />
+            <input
+              id="email"
+              type="email"
+              placeholder="Введите E-mail"
+              {...register('email')}
+            />
             {errors.email && (
               <p className="error_message">{errors.email.message}</p>
             )}
@@ -59,7 +90,12 @@ const RegisterPage = () => {
 
           <div className="form_group">
             <label htmlFor="name">Имя</label>
-            <input id="name" type="text" placeholder="Введите ваше имя" />
+            <input
+              id="name"
+              type="text"
+              placeholder="Введите ваше имя"
+              {...register('name')}
+            />
             {errors.name && (
               <p className="error_message">{errors.name.message}</p>
             )}
@@ -131,11 +167,15 @@ const RegisterPage = () => {
           </div>
 
           <div className="enter_button">
-            <Link to="/login">
-              <p>Уже есть аккаунт?</p>
+            <Link to="/login" className="enter_button_link">
+              <p className="enter_button_p">Уже есть аккаунт?</p>
             </Link>
-            <button type="submit" className="enter_button_text">
-              Регистрация
+            <button
+              type="submit"
+              className="enter_button_text"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Регистрация...' : 'Регистрация'}
             </button>
           </div>
           <div className="or">

@@ -100,8 +100,8 @@ const LoginPage = () => {
           </div>
 
           <div className="enter_button">
-            <Link to="/forgotpassword">
-              <p>Забыли пароль?</p>
+            <Link to="/forgotpassword" className="enter_button_link">
+              <p className='enter_button_p'>Забыли пароль?</p>
             </Link>
             <button type="submit" className="enter_button_text">
               Вход

@@ -39,8 +39,8 @@ const ForgotPasswordPage = () => {
           </div>
 
           <div className="enter_button">
-            <Link to="/login">
-              <p>Назад</p>
+            <Link to="/login" className="enter_button_link">
+              <p className='enter_button_p'>Назад</p>
             </Link>
             <button type="submit" className="enter_button_text">
               Отправить
