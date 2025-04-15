@@ -90,24 +90,21 @@ export const changePassword = createAsyncThunk(
 
       const res = await axios.patch(
         `${BASE_URL}users/profile/password`,
-        {
-          newPassword,
-          confirmPassword
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+        { newPassword, confirmPassword },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
+      
       return res.data;
     } catch (err) {
       if (err.response?.status === 401) {
         return rejectWithValue('Необхідна авторизація');
+      } else if (err.response?.status === 400) {
+        return rejectWithValue(err.response?.data?.message || 'Невірний формат даних');
+      } else if (err.response?.status === 404) {
+        return rejectWithValue('Користувача не знайдено');
+      } else {
+        return rejectWithValue(err.response?.data?.message || 'Помилка зміни паролю');
       }
-      return rejectWithValue(
-        err.response?.data?.message || 'Помилка зміни паролю'
-      );
     }
   }
 );

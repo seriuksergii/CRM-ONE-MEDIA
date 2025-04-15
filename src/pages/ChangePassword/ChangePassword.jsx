@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -59,11 +59,28 @@ const ChangePassword = () => {
     }
   };
 
-  const togglePasswordVisibility = (field) => {
+  const togglePasswordVisibility = useCallback((field) => {
     setShowPasswords(prev => ({
       ...prev,
       [field]: !prev[field]
     }));
+  }, []);
+
+  const newPasswordValidation = {
+    required: 'Це поле обов\'язкове',
+    minLength: {
+      value: 6,
+      message: 'Мінімум 6 символів'
+    },
+    pattern: {
+      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+      message: 'Пароль має містити літери та цифри'
+    }
+  };
+
+  const confirmPasswordValidation = {
+    required: 'Це поле обов\'язкове',
+    validate: value => value === newPassword || 'Паролі не збігаються'
   };
 
   return (
@@ -73,7 +90,6 @@ const ChangePassword = () => {
       <h3>Будь ласка, введіть новий пароль</h3>
       
       <form onSubmit={handleSubmit(onSubmit)}>
-        
         <div className="form_group password_group">
           <label htmlFor="newPassword">Новий пароль</label>
           <div className="password_input_wrapper">
@@ -81,17 +97,7 @@ const ChangePassword = () => {
               id="newPassword"
               type={showPasswords.new ? 'text' : 'password'}
               placeholder="Введіть новий пароль"
-              {...register('newPassword', {
-                required: 'Це поле обов\'язкове',
-                minLength: {
-                  value: 6,
-                  message: 'Мінімум 6 символів'
-                },
-                pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-                  message: 'Пароль має містити літери та цифри'
-                }
-              })}
+              {...register('newPassword', newPasswordValidation)}
             />
             <div 
               className="password_eye" 
@@ -105,7 +111,6 @@ const ChangePassword = () => {
           )}
         </div>
 
-        
         <div className="form_group password_group">
           <label htmlFor="confirmPassword">Підтвердіть пароль</label>
           <div className="password_input_wrapper">
@@ -113,11 +118,7 @@ const ChangePassword = () => {
               id="confirmPassword"
               type={showPasswords.confirm ? 'text' : 'password'}
               placeholder="Повторіть новий пароль"
-              {...register('confirmPassword', {
-                required: 'Це поле обов\'язкове',
-                validate: value => 
-                  value === newPassword || 'Паролі не збігаються'
-              })}
+              {...register('confirmPassword', confirmPasswordValidation)}
             />
             <div 
               className="password_eye" 
