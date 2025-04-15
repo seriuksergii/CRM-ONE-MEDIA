@@ -78,3 +78,36 @@ export const logoutUser = createAsyncThunk(
     }
   }
 );
+
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async ({ newPassword, confirmPassword }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        return rejectWithValue('Необхідна авторизація');
+      }
+
+      const res = await axios.patch(
+        `${BASE_URL}users/profile/password`,
+        {
+          newPassword,
+          confirmPassword
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      return res.data;
+    } catch (err) {
+      if (err.response?.status === 401) {
+        return rejectWithValue('Необхідна авторизація');
+      }
+      return rejectWithValue(
+        err.response?.data?.message || 'Помилка зміни паролю'
+      );
+    }
+  }
+);
