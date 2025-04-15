@@ -73,7 +73,7 @@ const ChangePassword = () => {
       <h3>Будь ласка, введіть новий пароль</h3>
       
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Новий пароль */}
+        
         <div className="form_group password_group">
           <label htmlFor="newPassword">Новий пароль</label>
           <div className="password_input_wrapper">
@@ -105,7 +105,7 @@ const ChangePassword = () => {
           )}
         </div>
 
-        {/* Підтвердження пароля */}
+        
         <div className="form_group password_group">
           <label htmlFor="confirmPassword">Підтвердіть пароль</label>
           <div className="password_input_wrapper">
