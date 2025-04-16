@@ -11,6 +11,7 @@ import { loginUser } from '../../api/api';
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [serverError, setServerError] = useState('');
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
@@ -25,14 +26,38 @@ const LoginPage = () => {
     mode: 'onChange',
   });
 
+  const translateError = (errorMessage) => {
+    const errorTranslations = {
+      'Invalid credentials': 'Неверный email или пароль',
+      'User not found': 'Пользователь не найден',
+      'Account is locked': 'Аккаунт заблокирован',
+      'Too many login attempts': 'Слишком много попыток входа. Попробуйте позже',
+      'Network error': 'Ошибка сети. Проверьте подключение',
+      'Authentication error': 'Ошибка авторизации',
+      'An unexpected error occurred': 'Произошла непредвиденная ошибка'
+    };
+    
+    return errorTranslations[errorMessage] || errorMessage;
+  };
+
   const onSubmit = async (data) => {
     console.log('Submitted login data:', data);
-    const result = await dispatch(loginUser(data));
-
-    if (loginUser.fulfilled.match(result)) {
-      navigate('/dashboard');
-    } else {
-      console.log('Login failed:', result.payload);
+    setServerError('');
+    
+    try {
+      const result = await dispatch(loginUser(data));
+      
+      // Проверяем, был ли action успешно выполнен
+      if (loginUser.fulfilled.match(result)) {
+        navigate('/dashboard');
+      } else if (loginUser.rejected.match(result)) {
+        // Обрабатываем ошибку от сервера и переводим на русский
+        const errorMessage = result.payload || 'Authentication error';
+        setServerError(translateError(errorMessage));
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setServerError(translateError('An unexpected error occurred'));
     }
   };
 
@@ -61,6 +86,9 @@ const LoginPage = () => {
                 },
               })}
             />
+            {errors.email && (
+              <p className="error_message">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="form_group password_group">
@@ -98,7 +126,13 @@ const LoginPage = () => {
               <p className="error_message">{errors.password.message}</p>
             )}
           </div>
-
+          
+          {serverError && (
+            <div className="error_message server_error">
+              {serverError}
+            </div>
+          )}
+          
           <div className="enter_button">
             <Link to="/forgotpassword" className="enter_button_link">
               <p className='enter_button_p'>Забыли пароль?</p>
