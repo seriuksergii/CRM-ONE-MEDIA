@@ -108,3 +108,76 @@ export const changePassword = createAsyncThunk(
     }
   }
 );
+
+// Users management
+export const getAllUsers = createAsyncThunk(
+  'users/getAll',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${BASE_URL}users`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch users');
+    }
+  }
+);
+
+export const getUserById = createAsyncThunk(
+  'users/getById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${BASE_URL}users/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch user');
+    }
+  }
+);
+
+export const updateUserRole = createAsyncThunk(
+  'users/updateRole',
+  async ({ id, role }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${BASE_URL}users/${id}/role`, { role });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to update role');
+    }
+  }
+);
+
+export const updateUserRoleAndTeam = createAsyncThunk(
+  'users/updateRoleAndTeam',
+  async ({ id, role, team }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${BASE_URL}users/${id}/role-and-team`, { role, team });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to update user');
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  'users/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(`${BASE_URL}users/${id}`);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to delete user');
+    }
+  }
+);
+
+export const getTeams = createAsyncThunk(
+  'users/getTeams',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${BASE_URL}users/teams`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch teams');
+    }
+  }
+);

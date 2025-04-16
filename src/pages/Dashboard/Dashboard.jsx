@@ -3,8 +3,10 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import { FiBell } from 'react-icons/fi';
-import { IoChevronDownOutline } from 'react-icons/io5';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { IoPersonOutline, IoChevronDownOutline } from 'react-icons/io5';
+import { HiOutlineUsers } from 'react-icons/hi';
+import { TbLayoutSidebarRightExpand } from 'react-icons/tb';
+import { FiUsers } from "react-icons/fi";
 import { logoutUser } from '../../api/api';
 import './Dashboard.css';
 
@@ -13,6 +15,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -25,6 +28,10 @@ const Dashboard = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
   return (
@@ -57,7 +64,7 @@ const Dashboard = () => {
           <div className="admin-dropdown">
             <div className="admin-trigger" onClick={toggleDropdown}>
               <div className="admin-icon">
-                <FaRegUserCircle />
+                <IoPersonOutline />
               </div>
               <div className="admin-info">
                 <span className="admin-name">Admin</span>
@@ -74,10 +81,31 @@ const Dashboard = () => {
           </div>
         </div>
       </header>
-      <main className="dashboard_content">
-        <h1 className="dashboard_title">Dashboard</h1>
-        <p>Welcome to your dashboard!</p>
-      </main>
+
+      <div className="sidebar-wrapper">
+        <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+          <button
+            className={`menu-toggle ${isSidebarCollapsed ? 'collapsed' : ''}`}
+            onClick={toggleSidebar}
+          >
+            <TbLayoutSidebarRightExpand size={24} />
+          </button>
+          <div className="menu-section">
+            <div className="menu-title">Navigation</div>
+            <Link to="/users" className="menu-item active">
+              <FiUsers className="menu-icon" />
+              <span className="menu-label">Users</span>
+            </Link>
+          </div>
+          <div className="user-profile-mini">
+            <img src="/public/Overlay.svg" alt="User" className="user-avatar" />
+            <div className="user-info-mini">
+              <div className="user_name_mini">Admin User</div>
+              <div className="user_email_mini">admin@example.com</div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 };
