@@ -109,7 +109,6 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-// Users management
 export const getAllUsers = createAsyncThunk(
   'users/getAll',
   async (_, { rejectWithValue }) => {

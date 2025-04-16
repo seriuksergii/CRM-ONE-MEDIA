@@ -18,7 +18,11 @@ const DashboardPage = () => {
             </button>
           </div>
         </div>
-        <img src="/public/One Media Logo Main Black 1.svg" alt="" className='dashboardPage_logo' />
+        <img
+          src="/One Media Logo Main Black 1.svg"
+          alt=""
+          className="dashboardPage_logo"
+        />
       </div>
     </>
   );
