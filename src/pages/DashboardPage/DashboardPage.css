@@ -1,0 +1,35 @@
+.dashboardPage_header_title {
+  font: 700 24px/32px 'Inter', sans-serif;
+  color: #09090b;
+}
+
+.dashboardPage_header_text {
+  font: 400 14px/24px 'Inter', sans-serif;
+  color: #71717a;
+}
+
+.dashboardPage_header_button {
+  font: 400 14px/20px 'Inter', sans-serif;
+  color: #fafafa;
+  text-align: center;
+  background-color: #0066cc;
+  box-shadow: 0px 1px 2px 0px #0000000d;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+}
+.dashboardPage_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboardPage_wrapper {
+  padding: 24px 32px;
+}
+
+.dashboardPage_header_button:hover {
+  background-color: #005bb5;
+}
+
