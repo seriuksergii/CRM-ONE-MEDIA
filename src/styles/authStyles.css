@@ -25,13 +25,13 @@
 }
 
 .login_title {
-  font: 600 32px/150% 'Mulish', sans-serif;
+  font: 600 32px/150% 'Inter', sans-serif;
   color: #121311;
  
  
 }
 h3 {
-  font: 400 16px/150% 'Mulish', sans-serif;
+  font: 400 16px/150% 'Inter', sans-serif;
   color: #595b58;
   padding-bottom: 20px;
   text-align: center;
@@ -52,7 +52,7 @@ form {
 }
 
 .form_group label {
-  font: 600 12px/150% 'Mulish', sans-serif;
+  font: 600 12px/150% 'Inter', sans-serif;
   color: #595b58;
   text-align: left;
   padding-left: 20px;
@@ -63,7 +63,7 @@ form input {
   background-color: #f7f8f5;
   border-radius: 8px;
   border: none;
-  font: 400 16px/150% 'Mulish', sans-serif;
+  font: 400 16px/150% 'Inter', sans-serif;
   width: 100%;
   box-sizing: border-box;
 }
@@ -112,7 +112,7 @@ form input::placeholder {
 }
 
 .enter_button_p {
-  font: 400 14px/150% 'Mulish', sans-serif;
+  font: 400 14px/150% 'Inter', sans-serif;
   color: #121311;
 }
 
@@ -121,14 +121,14 @@ form button {
   color: white;
   border: none;
   border-radius: 38px;
-  font: 600 16px/150% 'Mulish', sans-serif;
+  font: 600 16px/150% 'Inter', sans-serif;
   cursor: pointer;
   width: 35%;
   transition: background-color 0.3s;
 }
 
 .enter_button_text {
-  font: 400 14px/150% 'Mulish', sans-serif;
+  font: 400 14px/150% 'Inter', sans-serif;
   color: #fff;
   padding: 12px 20px;
 }
@@ -170,14 +170,14 @@ form button {
 }
 
 .google {
-  font: 400 14px/150% 'Mulish', sans-serif;
+  font: 400 14px/150% 'Inter', sans-serif;
   background-color: #fff;
   color: #787987;
   border: 1px solid #c3c5c0;
 }
 
 .facebok {
-  font: 400 14px/150% 'Mulish', sans-serif;
+  font: 400 14px/150% 'Inter', sans-serif;
   background-color: #1877f2;
   color: #fff;
 }

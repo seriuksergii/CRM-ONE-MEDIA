@@ -48,34 +48,34 @@ const Dashboard = () => {
           </Link>
         </div>
         <div className="dashboard_header_right">
-          <div className="search-container">
-            <CiSearch className="search-icon" />
+          <div className="search_container">
+            <CiSearch className="search_icon" />
             <input
               type="text"
               placeholder="Search..."
-              className="search-input"
+              className="search_input"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <div className="notifications">
-            <FiBell className="notification-icon" />
-            <div className="notification-badge">2</div>
+            <FiBell className="notification_icon" />
+            <div className="notification_badge">2</div>
           </div>
-          <div className="admin-dropdown">
-            <div className="admin-trigger" onClick={toggleDropdown}>
-              <div className="admin-icon">
+          <div className="admin_dropdown">
+            <div className="admin_trigger" onClick={toggleDropdown}>
+              <div className="admin_icon">
                 <FaRegUserCircle />
               </div>
-              <div className="admin-info">
-                <span className="admin-name">Admin</span>
+              <div className="admin_info">
+                <span className="admin_name">Admin</span>
                 <IoChevronDownOutline
-                  className={`admin-arrow ${isDropdownOpen ? 'open' : ''}`}
+                  className={`admin_arrow ${isDropdownOpen ? 'open' : ''}`}
                 />
               </div>
             </div>
-            <div className={`dropdown-menu ${isDropdownOpen ? 'open' : ''}`}>
-              <div className="dropdown-item" onClick={handleLogout}>
+            <div className={`dropdown_menu ${isDropdownOpen ? 'open' : ''}`}>
+              <div className="dropdown_item" onClick={handleLogout}>
                 Logout
               </div>
             </div>
@@ -83,29 +83,29 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <div className="dashboard-content">
-        <div className="sidebar-wrapper">
+      <div className="dashboard_content">
+        <div className="sidebar_wrapper">
           <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
             <button
-              className={`menu-toggle ${isSidebarCollapsed ? 'collapsed' : ''}`}
+              className={`menu_toggle ${isSidebarCollapsed ? 'collapsed' : ''}`}
               onClick={toggleSidebar}
             >
               <TbLayoutSidebarRightExpand size={24} />
             </button>
-            <div className="menu-section">
-              <div className="menu-title">Navigation</div>
-              <Link to="/dashboard/dashboardpage" className="menu-item">
-                <LuLayoutDashboard className="menu-icon" />
-                <span className="menu-label">Dashboard</span>
+            <div className="menu_section">
+              <div className="menu_title">Navigation</div>
+              <Link to="/dashboard/dashboardpage" className="menu_item">
+                <LuLayoutDashboard className="menu_icon" />
+                <span className="menu_label">Dashboard</span>
               </Link>
-              <Link to="/dashboard/users" className="menu-item active">
-                <FiUsers className="menu-icon" />
-                <span className="menu-label">Users</span>
+              <Link to="/dashboard/users" className="menu_item active">
+                <FiUsers className="menu_icon" />
+                <span className="menu_label">Users</span>
               </Link>
             </div>
-            <div className="user-profile-mini">
-              <img src="/Overlay.svg" alt="User" className="user-avatar" />
-              <div className="user-info-mini">
+            <div className="user_profile_mini">
+              <img src="/Overlay.svg" alt="User" className="user_vatar" />
+              <div className="user_info_mini">
                 <div className="user_name_mini">Admin User</div>
                 <div className="user_email_mini">admin@example.com</div>
               </div>

@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllUsers, getUserById, updateUserRole, updateUserRoleAndTeam, deleteUser, getTeams } from '../../api/api';
+import {
+  getAllUsers,
+  updateUserRoleAndTeam,
+  deleteUser,
+  getTeams,
+} from '../../api/api';
 
 const initialState = {
   users: [],
   teams: [],
   loading: false,
   error: null,
-  selectedUser: null
+  selectedUser: null,
 };
 
 const usersSlice = createSlice({
@@ -18,11 +23,11 @@ const usersSlice = createSlice({
     },
     setSelectedUser: (state, action) => {
       state.selectedUser = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
-      // Get All Users
+
       .addCase(getAllUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -36,7 +41,6 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Get Teams
       .addCase(getTeams.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -50,7 +54,6 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Update User Role and Team
       .addCase(updateUserRoleAndTeam.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -58,7 +61,7 @@ const usersSlice = createSlice({
       .addCase(updateUserRoleAndTeam.fulfilled, (state, action) => {
         state.loading = false;
         const updatedUser = action.payload;
-        state.users = state.users.map(user => 
+        state.users = state.users.map((user) =>
           user.id === updatedUser.id ? updatedUser : user
         );
       })
@@ -67,21 +70,20 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Delete User
       .addCase(deleteUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = state.users.filter(user => user.id !== action.payload);
+        state.users = state.users.filter((user) => user.id !== action.payload);
       })
       .addCase(deleteUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
-  }
+  },
 });
 
 export const { clearError, setSelectedUser } = usersSlice.actions;
-export default usersSlice.reducer; 
+export default usersSlice.reducer;

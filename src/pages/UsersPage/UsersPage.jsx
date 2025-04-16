@@ -54,14 +54,14 @@ const UsersPage = () => {
     }
   };
 
-  if (loading) return <div className="users-loading">Loading...</div>;
-  if (error) return <div className="users-error">{error}</div>;
+  if (loading) return <div className="users_loading">Loading...</div>;
+  if (error) return <div className="users_error">{error}</div>;
 
   return (
-    <div className="users-page">
-      <h1>Users Management</h1>
+    <div className="users_page">
+      <h1>Users</h1>
       
-      <div className="users-table">
+      <div className="users_table">
         <table>
           <thead>
             <tr>
@@ -90,10 +90,10 @@ const UsersPage = () => {
       </div>
 
       {isEditModalOpen && (
-        <div className="edit-modal">
-          <div className="modal-content">
+        <div className="edit_modal">
+          <div className="modal_content">
             <h2>Edit User</h2>
-            <div className="form-group">
+            <div className="form_group">
               <label>Role:</label>
               <select
                 value={editForm.role}
@@ -105,7 +105,7 @@ const UsersPage = () => {
                 <option value="head">Head</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form_group">
               <label>Team:</label>
               <select
                 value={editForm.team}
@@ -117,7 +117,7 @@ const UsersPage = () => {
                 ))}
               </select>
             </div>
-            <div className="modal-actions">
+            <div className="modal_actions">
               <button onClick={handleUpdateUser}>Save</button>
               <button onClick={() => setIsEditModalOpen(false)}>Cancel</button>
             </div>
