@@ -16,7 +16,7 @@ const ChangePassword = () => {
 
   const [showPasswords, setShowPasswords] = useState({
     new: false,
-    confirm: false
+    confirm: false,
   });
 
   const {
@@ -28,24 +28,26 @@ const ChangePassword = () => {
     mode: 'onChange',
     defaultValues: {
       newPassword: '',
-      confirmPassword: ''
-    }
+      confirmPassword: '',
+    },
   });
 
   const newPassword = watch('newPassword');
 
   const onSubmit = async (data) => {
     if (!isValid) return;
-    
+
     try {
       setIsLoading(true);
       setError('');
       setSuccessMessage('');
 
-      await dispatch(changePassword({
-        newPassword: data.newPassword,
-        confirmPassword: data.confirmPassword
-      })).unwrap();
+      await dispatch(
+        changePassword({
+          newPassword: data.newPassword,
+          confirmPassword: data.confirmPassword,
+        })
+      ).unwrap();
 
       setSuccessMessage('Пароль успешно изменен!');
       setTimeout(() => navigate('/dashboard'), 1500);
@@ -61,9 +63,9 @@ const ChangePassword = () => {
   };
 
   const togglePasswordVisibility = useCallback((field) => {
-    setShowPasswords(prev => ({
+    setShowPasswords((prev) => ({
       ...prev,
-      [field]: !prev[field]
+      [field]: !prev[field],
     }));
   }, []);
 
@@ -71,81 +73,85 @@ const ChangePassword = () => {
     required: 'Это поле обязательно',
     minLength: {
       value: 8,
-      message: 'Минимум 8 символов'
+      message: 'Минимум 8 символов',
     },
     pattern: {
       value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-      message: 'Пароль должен содержать буквы и цифры'
-    }
+      message: 'Пароль должен содержать буквы и цифры',
+    },
   };
 
   const confirmPasswordValidation = {
     required: 'Это поле обязательно',
-    validate: value => value === newPassword || 'Пароли не совпадают'
+    validate: (value) => value === newPassword || 'Пароли не совпадают',
   };
 
   return (
-    <div className="login_page">
-      <img src="/Mask group.png" alt="logo" className="logo" />
-      <h1 className="login_title">Изменение пароля</h1>
-      <h3>Пожалуйста, введите новый пароль</h3>
-      
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form_group password_group">
-          <label htmlFor="newPassword">Новый пароль</label>
-          <div className="password_input_wrapper">
-            <input
-              id="newPassword"
-              type={showPasswords.new ? 'text' : 'password'}
-              placeholder="Введите новый пароль"
-              {...register('newPassword', newPasswordValidation)}
-            />
-            <div 
-              className="password_eye" 
-              onClick={() => togglePasswordVisibility('new')}
-            >
-              {showPasswords.new ? <FiEye /> : <FiEyeOff />}
+    <div className="auth-container">
+      <div className="login_page">
+        <img src="/Mask group.png" alt="logo" className="logo" />
+        <h1 className="login_title">Изменение пароля</h1>
+        <h3>Пожалуйста, введите новый пароль</h3>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form_group password_group">
+            <label htmlFor="newPassword">Новый пароль</label>
+            <div className="password_input_wrapper">
+              <input
+                id="newPassword"
+                type={showPasswords.new ? 'text' : 'password'}
+                placeholder="Введите новый пароль"
+                {...register('newPassword', newPasswordValidation)}
+              />
+              <div
+                className="password_eye"
+                onClick={() => togglePasswordVisibility('new')}
+              >
+                {showPasswords.new ? <FiEye /> : <FiEyeOff />}
+              </div>
             </div>
+            {errors.newPassword && (
+              <p className="error_message">{errors.newPassword.message}</p>
+            )}
           </div>
-          {errors.newPassword && (
-            <p className="error_message">{errors.newPassword.message}</p>
-          )}
-        </div>
 
-        <div className="form_group password_group">
-          <label htmlFor="confirmPassword">Подтвердите пароль</label>
-          <div className="password_input_wrapper">
-            <input
-              id="confirmPassword"
-              type={showPasswords.confirm ? 'text' : 'password'}
-              placeholder="Повторите новый пароль"
-              {...register('confirmPassword', confirmPasswordValidation)}
-            />
-            <div 
-              className="password_eye" 
-              onClick={() => togglePasswordVisibility('confirm')}
-            >
-              {showPasswords.confirm ? <FiEye /> : <FiEyeOff />}
+          <div className="form_group password_group">
+            <label htmlFor="confirmPassword">Подтвердите пароль</label>
+            <div className="password_input_wrapper">
+              <input
+                id="confirmPassword"
+                type={showPasswords.confirm ? 'text' : 'password'}
+                placeholder="Повторите новый пароль"
+                {...register('confirmPassword', confirmPasswordValidation)}
+              />
+              <div
+                className="password_eye"
+                onClick={() => togglePasswordVisibility('confirm')}
+              >
+                {showPasswords.confirm ? <FiEye /> : <FiEyeOff />}
+              </div>
             </div>
+            {errors.confirmPassword && (
+              <p className="error_message">{errors.confirmPassword.message}</p>
+            )}
           </div>
-          {errors.confirmPassword && (
-            <p className="error_message">{errors.confirmPassword.message}</p>
+
+          {error && <p className="error_message">{error}</p>}
+          {successMessage && (
+            <p className="success_message">{successMessage}</p>
           )}
-        </div>
 
-        {error && <p className="error_message">{error}</p>}
-        {successMessage && <p className="success_message">{successMessage}</p>}
-
-        <div className="change_password_button">
-          <button 
-            type="submit" 
-            className="enter_button_text"
-            disabled={isLoading || !isValid}
-          >
-            {isLoading ? 'Изменение...' : 'Изменить пароль'}
-          </button>
-        </div>
-      </form>
+          <div className="change_password_button">
+            <button
+              type="submit"
+              className="enter_button_text"
+              disabled={isLoading || !isValid}
+            >
+              {isLoading ? 'Изменение...' : 'Изменить пароль'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
