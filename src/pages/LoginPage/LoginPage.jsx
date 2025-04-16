@@ -31,27 +31,26 @@ const LoginPage = () => {
       'Invalid credentials': 'Неверный email или пароль',
       'User not found': 'Пользователь не найден',
       'Account is locked': 'Аккаунт заблокирован',
-      'Too many login attempts': 'Слишком много попыток входа. Попробуйте позже',
+      'Too many login attempts':
+        'Слишком много попыток входа. Попробуйте позже',
       'Network error': 'Ошибка сети. Проверьте подключение',
       'Authentication error': 'Ошибка авторизации',
-      'An unexpected error occurred': 'Произошла непредвиденная ошибка'
+      'An unexpected error occurred': 'Произошла непредвиденная ошибка',
     };
-    
+
     return errorTranslations[errorMessage] || errorMessage;
   };
 
   const onSubmit = async (data) => {
     console.log('Submitted login data:', data);
     setServerError('');
-    
+
     try {
       const result = await dispatch(loginUser(data));
-      
-      // Проверяем, был ли action успешно выполнен
+
       if (loginUser.fulfilled.match(result)) {
         navigate('/dashboard');
       } else if (loginUser.rejected.match(result)) {
-        // Обрабатываем ошибку от сервера и переводим на русский
         const errorMessage = result.payload || 'Authentication error';
         setServerError(translateError(errorMessage));
       }
@@ -126,16 +125,14 @@ const LoginPage = () => {
               <p className="error_message">{errors.password.message}</p>
             )}
           </div>
-          
+
           {serverError && (
-            <div className="error_message server_error">
-              {serverError}
-            </div>
+            <div className="error_message server_error">{serverError}</div>
           )}
-          
+
           <div className="enter_button">
             <Link to="/forgotpassword" className="enter_button_link">
-              <p className='enter_button_p'>Забыли пароль?</p>
+              <p className="enter_button_p">Забыли пароль?</p>
             </Link>
             <button type="submit" className="enter_button_text">
               Вход
