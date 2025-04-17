@@ -351,17 +351,18 @@
   position: relative;
 }
 
-.main-content {
+.main_content {
   position: absolute;
   top: 0;
   right: 0;
-  left: 254px;
+  left: 260px;
   padding: 60px;
   margin-top: 20px;
   background: #ffffffb2;
   transition: left 0.3s ease;
   min-height: calc(100vh - 73px);
   z-index: 1;
+  
 }
 
 .main_content.collapsed {

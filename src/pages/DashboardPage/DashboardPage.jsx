@@ -4,6 +4,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { logoutUser } from '../../api/api';
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import '../../styles/dashdoardStyles.css';
 
 
 const DashboardLayout = () => {
@@ -39,7 +40,7 @@ const DashboardLayout = () => {
             toggleSidebar={toggleSidebar}
           />
         </div>
-        <main className={`main-content ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+        <main className={`main_content ${isSidebarCollapsed ? 'collapsed' : ''}`}>
           <Outlet />
         </main>
       </div>
