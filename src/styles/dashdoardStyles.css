@@ -238,6 +238,10 @@
   width: 50px;
 }
 
+.sidebar.collapsed .menu_title {
+  visibility: hidden;
+}
+
 .menu_toggle {
   position: absolute;
   right: 10px;
@@ -257,6 +261,7 @@
 
 .menu_toggle.collapsed {
   transform: rotate(180deg);
+  margin-right: 12px;
 }
 
 .menu_toggle svg {
