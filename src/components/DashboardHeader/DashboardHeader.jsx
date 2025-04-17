@@ -4,12 +4,12 @@ import { CiSearch } from 'react-icons/ci';
 import { FiBell } from 'react-icons/fi';
 import { IoChevronDownOutline } from 'react-icons/io5';
 import { FaRegUserCircle } from 'react-icons/fa';
-import { useSelector } from 'react-redux'; // Додано імпорт useSelector
+import { useSelector } from 'react-redux';
 import '../../styles/dashdoardStyles.css';
 
 const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const currentUser = useSelector((state) => state.users.currentUser); // Отримуємо поточного користувача з Redux
+  const currentUser = useSelector((state) => state.users.currentUser);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -19,7 +19,11 @@ const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
     <header className="dashboard_header">
       <div className="dashboard_header_left">
         <Link to="/dashboard">
-          <img src="/Heading 1.png" alt="logo" className="dashboard_header_logo" />
+          <img
+            src="/Heading 1.png"
+            alt="logo"
+            className="dashboard_header_logo"
+          />
         </Link>
       </div>
       <div className="dashboard_header_right">
@@ -41,16 +45,20 @@ const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
           <div className="admin_trigger" onClick={toggleDropdown}>
             <div className="admin_icon">
               {currentUser?.avatar ? (
-                <img src={currentUser.avatar} alt="User" className="user_avatar" />
+                <img
+                  src={currentUser.avatar}
+                  alt="User"
+                  className="user_avatar"
+                />
               ) : (
                 <FaRegUserCircle />
               )}
             </div>
             <div className="admin_info">
-              <span className="admin_name">
-                {currentUser?.name || 'Admin'}
-              </span>
-              <IoChevronDownOutline className={`admin_arrow ${isDropdownOpen ? 'open' : ''}`} />
+              <span className="admin_name">{currentUser?.name || 'Admin'}</span>
+              <IoChevronDownOutline
+                className={`admin_arrow ${isDropdownOpen ? 'open' : ''}`}
+              />
             </div>
           </div>
           <div className={`dropdown_menu ${isDropdownOpen ? 'open' : ''}`}>

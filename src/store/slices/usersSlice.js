@@ -4,13 +4,15 @@ import {
   updateUserRoleAndTeam,
   deleteUser,
   getTeams,
-  getCurrentUserProfile
+  getCurrentUserProfile,
 } from '../../api/api';
 
 const initialState = {
   users: [],
+  usersWithRoles: [],
   teams: [],
-  currentUser: null, // Додано поле для поточного користувача
+  roles: [],
+  currentUser: null,
   loading: false,
   error: null,
   selectedUser: null,
@@ -29,7 +31,7 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Отримання всіх користувачів
+
       .addCase(getAllUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -43,7 +45,6 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Отримання команд
       .addCase(getTeams.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -57,7 +58,6 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Оновлення ролі та команди
       .addCase(updateUserRoleAndTeam.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -74,7 +74,6 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Видалення користувача
       .addCase(deleteUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -88,7 +87,6 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Отримання поточного користувача
       .addCase(getCurrentUserProfile.pending, (state) => {
         state.loading = true;
         state.error = null;
