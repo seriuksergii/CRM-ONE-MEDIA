@@ -19,7 +19,7 @@ const Dashboard = () => {
           </div>
         </div>
         <img
-          src="/public/One Media Logo Main Black 1.svg"
+          src="/One Media Logo Main Black 1.svg"
           alt=""
           className="dashboardPage_logo"
         />
