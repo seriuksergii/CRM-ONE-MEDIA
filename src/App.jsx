@@ -25,6 +25,7 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route path="/changepassword" element={<ChangePassword />} />
         <Route path="/dashboard" element={<DashboardPage />}>
+          <Route index element={<Dashboard />} />
           <Route path="dashboardpage" element={<Dashboard />} />
           <Route path="users" element={<UsersPage />} />
         </Route>
