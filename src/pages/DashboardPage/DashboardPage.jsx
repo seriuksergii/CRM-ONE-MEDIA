@@ -4,7 +4,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { logoutUser } from '../../api/api';
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import './DashboardPage.css';
+
 
 const DashboardLayout = () => {
   const dispatch = useDispatch();

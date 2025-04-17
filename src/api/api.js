@@ -180,3 +180,15 @@ export const getTeams = createAsyncThunk(
     }
   }
 );
+
+export const getCurrentUserProfile = createAsyncThunk(
+  'users/getCurrentProfile',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${BASE_URL}users/profile/me`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch profile');
+    }
+  }
+);

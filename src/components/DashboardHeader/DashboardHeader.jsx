@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Add this import
+import { Link } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import { FiBell } from 'react-icons/fi';
 import { IoChevronDownOutline } from 'react-icons/io5';
 import { FaRegUserCircle } from 'react-icons/fa';
+import { useSelector } from 'react-redux'; // Додано імпорт useSelector
+import '../../styles/dashdoardStyles.css';
 
 const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const currentUser = useSelector((state) => state.users.currentUser); // Отримуємо поточного користувача з Redux
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -37,14 +40,25 @@ const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
         <div className="admin_dropdown">
           <div className="admin_trigger" onClick={toggleDropdown}>
             <div className="admin_icon">
-              <FaRegUserCircle />
+              {currentUser?.avatar ? (
+                <img src={currentUser.avatar} alt="User" className="user_avatar" />
+              ) : (
+                <FaRegUserCircle />
+              )}
             </div>
             <div className="admin_info">
-              <span className="admin_name">Admin</span>
+              <span className="admin_name">
+                {currentUser?.name || 'Admin'}
+              </span>
               <IoChevronDownOutline className={`admin_arrow ${isDropdownOpen ? 'open' : ''}`} />
             </div>
           </div>
           <div className={`dropdown_menu ${isDropdownOpen ? 'open' : ''}`}>
+            {currentUser?.email && (
+              <div className="dropdown_item email_item">
+                {currentUser.email}
+              </div>
+            )}
             <div className="dropdown_item" onClick={handleLogout}>
               Logout
             </div>

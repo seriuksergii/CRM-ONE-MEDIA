@@ -4,11 +4,13 @@ import {
   updateUserRoleAndTeam,
   deleteUser,
   getTeams,
+  getCurrentUserProfile
 } from '../../api/api';
 
 const initialState = {
   users: [],
   teams: [],
+  currentUser: null, // Додано поле для поточного користувача
   loading: false,
   error: null,
   selectedUser: null,
@@ -27,7 +29,7 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
+      // Отримання всіх користувачів
       .addCase(getAllUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -41,6 +43,7 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
+      // Отримання команд
       .addCase(getTeams.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -54,6 +57,7 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
+      // Оновлення ролі та команди
       .addCase(updateUserRoleAndTeam.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -70,6 +74,7 @@ const usersSlice = createSlice({
         state.error = action.payload;
       })
 
+      // Видалення користувача
       .addCase(deleteUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -79,6 +84,20 @@ const usersSlice = createSlice({
         state.users = state.users.filter((user) => user.id !== action.payload);
       })
       .addCase(deleteUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Отримання поточного користувача
+      .addCase(getCurrentUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = action.payload;
+      })
+      .addCase(getCurrentUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

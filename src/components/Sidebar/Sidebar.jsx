@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TbLayoutSidebarRightExpand } from 'react-icons/tb';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FiUsers } from 'react-icons/fi';
-import '../../styles/DashboardPage.css';
+import { getCurrentUserProfile } from '../../api/api';
+import '../../styles/dashdoardStyles.css';
 
 const Sidebar = ({ isSidebarCollapsed, toggleSidebar }) => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.users.currentUser);
+  
+  useEffect(() => {
+    dispatch(getCurrentUserProfile());
+  }, [dispatch]);
+
   return (
     <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
       <button
@@ -26,11 +35,13 @@ const Sidebar = ({ isSidebarCollapsed, toggleSidebar }) => {
         </Link>
       </div>
       <div className="user_profile_mini">
-        <img src="/Overlay.svg" alt="User" className="user_vatar" />
-        <div className="user_info_mini">
-          <div className="user_name_mini">Admin User</div>
-          <div className="user_email_mini">admin@example.com</div>
-        </div>
+        <img src="/Overlay.svg" alt="User" className="user_avatar" />
+        {!isSidebarCollapsed && currentUser && (
+          <div className="user_info_mini">
+            <div className="user_name_mini">{currentUser.name || 'Admin User'}</div>
+            <div className="user_email_mini">{currentUser.email || 'admin@example.com'}</div>
+          </div>
+        )}
       </div>
     </aside>
   );

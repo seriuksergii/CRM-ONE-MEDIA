@@ -300,10 +300,6 @@
   background: #f4f4f5;
 }
 
-.menu_item.active {
-  background: #e6e6e6;
-}
-
 .menu_icon {
   font-size: 20px;
   min-width: 20px;
