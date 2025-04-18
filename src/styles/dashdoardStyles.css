@@ -297,13 +297,14 @@
   border-radius: 8px;
   cursor: pointer;
   color: #09090b;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .menu_item.active {
   background-color: #0066cc;
   color: white;
+  border-radius: 10px;
 }
 
 .menu_item.active .menu_icon,
