@@ -353,11 +353,10 @@
 
 .main_content {
   position: absolute;
-  top: 0;
+  top: 85px;
   right: 0;
-  left: 260px;
-  padding: 60px;
-  margin-top: 20px;
+  left: 290px;
+
   background: #ffffffb2;
   transition: left 0.3s ease;
   min-height: calc(100vh - 73px);
@@ -365,7 +364,7 @@
 }
 
 .main_content.collapsed {
-  left: 50px;
+  left: 85px;
 }
 
 .menu_title {
