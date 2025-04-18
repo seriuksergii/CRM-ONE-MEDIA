@@ -9,6 +9,10 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ChangePassword from './pages/ChangePassword/ChangePassword';
 import UsersPage from './pages/UsersPage/UsersPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import CampaignsPage from './pages/CampaignsPage/CampaignsPage';
+import AnalyticsPage from './pages/AnalyticsPage/AnalyticsPage';
+import AccountsPage from './pages/AccountsPage/AccountsPage';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 function App() {
   return (
@@ -28,6 +32,10 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="dashboardpage" element={<Dashboard />} />
           <Route path="users" element={<UsersPage />} />
+          <Route path="campaigns" element={<CampaignsPage />} />
+          <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="accounts" element={<AccountsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
