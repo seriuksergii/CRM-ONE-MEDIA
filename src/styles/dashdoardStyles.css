@@ -309,6 +309,7 @@
 .menu_item.active .menu_icon,
 .menu_item.active .menu_label {
   color: white;
+  padding-left: 3px;
 }
 
 .menu_icon {
