@@ -301,8 +301,14 @@
   text-decoration: none;
 }
 
-.menu_item:hover {
-  background: #f4f4f5;
+.menu_item.active {
+  background-color: #0066cc;
+  color: white;
+}
+
+.menu_item.active .menu_icon,
+.menu_item.active .menu_label {
+  color: white;
 }
 
 .menu_icon {

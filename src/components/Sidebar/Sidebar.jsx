@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { TbLayoutSidebarRightExpand } from 'react-icons/tb';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FiUsers } from 'react-icons/fi';
@@ -25,14 +25,14 @@ const Sidebar = ({ isSidebarCollapsed, toggleSidebar }) => {
       </button>
       <div className="menu_section">
         <div className="menu_title">Navigation</div>
-        <Link to="/dashboard/dashboardpage" className="menu_item">
+        <NavLink to="/dashboard/dashboardpage" className="menu_item">
           <LuLayoutDashboard className="menu_icon" />
           <span className="menu_label">Dashboard</span>
-        </Link>
-        <Link to="/dashboard/users" className="menu_item active">
+        </NavLink>
+        <NavLink to="/dashboard/users" className="menu_item">
           <FiUsers className="menu_icon" />
           <span className="menu_label">Users</span>
-        </Link>
+        </NavLink>
       </div>
       <div className="user_profile_mini">
         <img src="/Overlay.svg" alt="User" className="user_avatar" />
