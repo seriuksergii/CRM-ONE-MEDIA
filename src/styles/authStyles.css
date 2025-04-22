@@ -81,7 +81,7 @@ form input::placeholder {
   top: 58%;
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 2;
+  z-index: 10;
 }
 
 .eye_icon {
@@ -158,6 +158,10 @@ form button {
   align-items: center;
   width: 50%;
   gap: 8px;
+}
+
+.social_button:nth-last-child(1) {
+  background-color: #1877f2;
 }
 
 .social_button p {

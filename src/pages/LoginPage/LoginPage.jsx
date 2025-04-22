@@ -6,6 +6,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import InputField from '../../components/InputField/InputField';
+import { translateError } from '../../utils/translateError';
 import './LoginPage.scss';
 import '../../styles/authStyles.css';
 
@@ -24,20 +25,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [serverError, setServerError] = useState('');
   const [isShowPassword, setIsShowPassword] = useState(false);
-
-  const translateError = (errorMessage) => {
-    const errorTranslations = {
-      'Invalid credentials': 'Неверный email или пароль',
-      'User not found': 'Пользователь не найден',
-      'Account is locked': 'Аккаунт заблокирован',
-      'Too many login attempts':
-        'Слишком много попыток входа. Попробуйте позже',
-      'Network error': 'Ошибка сети. Проверьте подключение',
-      'Authentication error': 'Ошибка авторизации',
-      'An unexpected error occurred': 'Произошла непредвиденная ошибка',
-    };
-    return errorTranslations[errorMessage] || errorMessage;
-  };
 
   const onSubmit = async (values) => {
     setServerError('');
@@ -58,6 +45,32 @@ const LoginPage = () => {
     setIsShowPassword((prev) => !prev);
   };
 
+  const inputFields = [
+    {
+      label: 'Email',
+      name: 'email',
+      type: 'email',
+      placeholder: 'Введите E-mail',
+      autoComplete: 'email',
+    },
+    {
+      label: 'Пароль',
+      name: 'password',
+      type: isShowPassword ? 'text' : 'password',
+      placeholder: 'Введите пароль',
+      autoComplete: 'current-password',
+      extra: (
+        <div className="password_eye" onClick={togglePasswordVisibility}>
+          {isShowPassword ? (
+            <FiEye className="eye_icon" />
+          ) : (
+            <FiEyeOff className="eye_icon" />
+          )}
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="auth-container">
       <div className="login_page">
@@ -73,30 +86,23 @@ const LoginPage = () => {
           onSubmit={onSubmit}
         >
           <Form>
-            <InputField
-              label="Email"
-              name="email"
-              type="email"
-              placeholder="Введите E-mail"
-              autoComplete="email"
-            />
-
-            <div className="password-input-wrapper">
-              <InputField
-                label="Пароль"
-                name="password"
-                type={isShowPassword ? 'text' : 'password'}
-                placeholder="Введите пароль"
-                autoComplete="current-password"
-              />
-              <div className="password_eye" onClick={togglePasswordVisibility}>
-                {isShowPassword ? (
-                  <FiEye className="eye_icon" />
-                ) : (
-                  <FiEyeOff className="eye_icon" />
-                )}
+            {inputFields.map((field) => (
+              <div
+                key={field.name}
+                className={
+                  field.name === 'password' ? 'password-input-wrapper' : ''
+                }
+              >
+                <InputField
+                  label={field.label}
+                  name={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  autoComplete={field.autoComplete}
+                />
+                {field.extra}
               </div>
-            </div>
+            ))}
 
             {serverError && (
               <div className="error_message server_error">{serverError}</div>
