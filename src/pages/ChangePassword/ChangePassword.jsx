@@ -1,51 +1,46 @@
-import React, { useState, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { FiEyeOff, FiEye } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
-import '../../styles/authStyles.css';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { changePassword } from '../../store/slices/authSlice';
-import './ChangePassword.css';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { FiEyeOff, FiEye } from 'react-icons/fi';
+import InputField from '../../components/InputField/InputField';
+import { translateError } from '../../utils/translateError';
+import './ChangePassword.scss';
+import '../../styles/authStyles.css';
+
+const changePasswordSchema = Yup.object().shape({
+  newPassword: Yup.string()
+    .required('Обязательное поле')
+    .min(8, 'Минимум 8 символов')
+    .matches(/[a-z]/, 'Должна быть хотя бы одна маленькая буква')
+    .matches(/[A-Z]/, 'Должна быть хотя бы одна большая буква')
+    .matches(/[\d\W]/, 'Должна быть хотя бы одна цифра или символ'),
+  confirmPassword: Yup.string()
+    .required('Подтвердите пароль')
+    .oneOf([Yup.ref('newPassword'), null], 'Пароли должны совпадать'),
+});
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [serverError, setServerError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-
   const [showPasswords, setShowPasswords] = useState({
     new: false,
     confirm: false,
   });
 
-  const {
-    handleSubmit,
-    register,
-    watch,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      newPassword: '',
-      confirmPassword: '',
-    },
-  });
-
-  const newPassword = watch('newPassword');
-
-  const onSubmit = async (data) => {
-    if (!isValid) return;
+  const onSubmit = async (values) => {
+    setServerError('');
+    setSuccessMessage('');
 
     try {
-      setIsLoading(true);
-      setError('');
-      setSuccessMessage('');
-
       await dispatch(
         changePassword({
-          newPassword: data.newPassword,
-          confirmPassword: data.confirmPassword,
+          newPassword: values.newPassword,
+          confirmPassword: values.confirmPassword,
         })
       ).unwrap();
 
@@ -55,36 +50,58 @@ const ChangePassword = () => {
       if (error === 'Требуется авторизация') {
         navigate('/login');
       } else {
-        setError(error || 'Ошибка при изменении пароля');
+        setServerError(translateError(error) || 'Ошибка при изменении пароля');
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const togglePasswordVisibility = useCallback((field) => {
+  const togglePasswordVisibility = (field) => {
     setShowPasswords((prev) => ({
       ...prev,
       [field]: !prev[field],
     }));
-  }, []);
-
-  const newPasswordValidation = {
-    required: 'Это поле обязательно',
-    minLength: {
-      value: 8,
-      message: 'Минимум 8 символов',
-    },
-    pattern: {
-      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-      message: 'Пароль должен содержать буквы и цифры',
-    },
   };
 
-  const confirmPasswordValidation = {
-    required: 'Это поле обязательно',
-    validate: (value) => value === newPassword || 'Пароли не совпадают',
-  };
+  const inputFields = [
+    {
+      label: 'Новый пароль',
+      name: 'newPassword',
+      type: showPasswords.new ? 'text' : 'password',
+      placeholder: 'Введите новый пароль',
+      autoComplete: 'new-password',
+      extra: (
+        <div
+          className="password_eye"
+          onClick={() => togglePasswordVisibility('new')}
+        >
+          {showPasswords.new ? (
+            <FiEye className="eye_icon" />
+          ) : (
+            <FiEyeOff className="eye_icon" />
+          )}
+        </div>
+      ),
+    },
+    {
+      label: 'Подтвердите пароль',
+      name: 'confirmPassword',
+      type: showPasswords.confirm ? 'text' : 'password',
+      placeholder: 'Повторите новый пароль',
+      autoComplete: 'new-password',
+      extra: (
+        <div
+          className="password_eye"
+          onClick={() => togglePasswordVisibility('confirm')}
+        >
+          {showPasswords.confirm ? (
+            <FiEye className="eye_icon" />
+          ) : (
+            <FiEyeOff className="eye_icon" />
+          )}
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className="auth-container">
@@ -93,64 +110,47 @@ const ChangePassword = () => {
         <h1 className="login_title">Изменение пароля</h1>
         <h3>Пожалуйста, введите новый пароль</h3>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form_group password_group">
-            <label htmlFor="newPassword">Новый пароль</label>
-            <div className="password_input_wrapper">
-              <input
-                id="newPassword"
-                type={showPasswords.new ? 'text' : 'password'}
-                placeholder="Введите новый пароль"
-                {...register('newPassword', newPasswordValidation)}
-              />
-              <div
-                className="password_eye"
-                onClick={() => togglePasswordVisibility('new')}
-              >
-                {showPasswords.new ? <FiEye /> : <FiEyeOff />}
-              </div>
-            </div>
-            {errors.newPassword && (
-              <p className="error_message">{errors.newPassword.message}</p>
-            )}
-          </div>
+        <Formik
+          initialValues={{ newPassword: '', confirmPassword: '' }}
+          validationSchema={changePasswordSchema}
+          validateOnChange={true}
+          validateOnBlur={true}
+          onSubmit={onSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              {inputFields.map((field) => (
+                <div key={field.name} className="password-input-wrapper">
+                  <InputField
+                    label={field.label}
+                    name={field.name}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    autoComplete={field.autoComplete}
+                  />
+                  {field.extra}
+                </div>
+              ))}
 
-          <div className="form_group password_group">
-            <label htmlFor="confirmPassword">Подтвердите пароль</label>
-            <div className="password_input_wrapper">
-              <input
-                id="confirmPassword"
-                type={showPasswords.confirm ? 'text' : 'password'}
-                placeholder="Повторите новый пароль"
-                {...register('confirmPassword', confirmPasswordValidation)}
-              />
-              <div
-                className="password_eye"
-                onClick={() => togglePasswordVisibility('confirm')}
-              >
-                {showPasswords.confirm ? <FiEye /> : <FiEyeOff />}
-              </div>
-            </div>
-            {errors.confirmPassword && (
-              <p className="error_message">{errors.confirmPassword.message}</p>
-            )}
-          </div>
+              {serverError && (
+                <div className="error_message server_error">{serverError}</div>
+              )}
+              {successMessage && (
+                <div className="success_message">{successMessage}</div>
+              )}
 
-          {error && <p className="error_message">{error}</p>}
-          {successMessage && (
-            <p className="success_message">{successMessage}</p>
+              <div className="change_password_button">
+                <button
+                  type="submit"
+                  className="enter_button_text"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Изменение...' : 'Изменить пароль'}
+                </button>
+              </div>
+            </Form>
           )}
-
-          <div className="change_password_button">
-            <button
-              type="submit"
-              className="enter_button_text"
-              disabled={isLoading || !isValid}
-            >
-              {isLoading ? 'Изменение...' : 'Изменить пароль'}
-            </button>
-          </div>
-        </form>
+        </Formik>
       </div>
     </div>
   );
