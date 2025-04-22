@@ -60,12 +60,8 @@ const LoginPage = () => {
       placeholder: 'Введите пароль',
       autoComplete: 'current-password',
       extra: (
-        <div className="password_eye" onClick={togglePasswordVisibility}>
-          {isShowPassword ? (
-            <FiEye className="eye_icon" />
-          ) : (
-            <FiEyeOff className="eye_icon" />
-          )}
+        <div onClick={togglePasswordVisibility}>
+          {isShowPassword ? <FiEye /> : <FiEyeOff />}
         </div>
       ),
     },
@@ -87,21 +83,15 @@ const LoginPage = () => {
         >
           <Form>
             {inputFields.map((field) => (
-              <div
+              <InputField
                 key={field.name}
-                className={
-                  field.name === 'password' ? 'password-input-wrapper' : ''
-                }
-              >
-                <InputField
-                  label={field.label}
-                  name={field.name}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  autoComplete={field.autoComplete}
-                />
-                {field.extra}
-              </div>
+                label={field.label}
+                name={field.name}
+                type={field.type}
+                placeholder={field.placeholder}
+                autoComplete={field.autoComplete}
+                extra={field.extra}
+              />
             ))}
 
             {serverError && (

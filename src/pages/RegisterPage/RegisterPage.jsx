@@ -15,9 +15,7 @@ const registerSchema = Yup.object().shape({
     .required('Обязательное поле')
     .min(2, 'Минимум 2 символа')
     .max(30, 'Максимум 30 символов'),
-  email: Yup.string()
-    .email('Некорректный email')
-    .required('Обязательное поле'),
+  email: Yup.string().email('Некорректный email').required('Обязательное поле'),
   password: Yup.string()
     .required('Обязательное поле')
     .min(8, 'Минимум 8 символов')
@@ -33,9 +31,11 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [serverError, setServerError] = useState('');
-  const [isShowPassword, setIsShowPassword] = useState(false);
-  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
   const onSubmit = async (values) => {
     setServerError('');
@@ -50,7 +50,7 @@ const RegisterPage = () => {
 
     try {
       const result = await dispatch(registerUser(payload));
-      
+
       if (registerUser.fulfilled.match(result)) {
         navigate('/dashboard');
       } else if (registerUser.rejected.match(result)) {
@@ -64,12 +64,11 @@ const RegisterPage = () => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setIsShowPassword((prev) => !prev);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setIsShowConfirmPassword((prev) => !prev);
+  const togglePasswordVisibility = (fieldName) => {
+    setShowPassword((prev) => ({
+      ...prev,
+      [fieldName]: !prev[fieldName],
+    }));
   };
 
   const inputFields = [
@@ -90,24 +89,32 @@ const RegisterPage = () => {
     {
       label: 'Пароль',
       name: 'password',
-      type: isShowPassword ? 'text' : 'password',
+      type: showPassword.password ? 'text' : 'password',
       placeholder: 'Введите пароль',
       autoComplete: 'new-password',
       extra: (
-        <div className="password_eye" onClick={togglePasswordVisibility}>
-          {isShowPassword ? <FiEye className="eye_icon" /> : <FiEyeOff className="eye_icon" />}
+        <div onClick={() => togglePasswordVisibility('password')}>
+          {showPassword.password ? (
+            <FiEye className="eye_icon" />
+          ) : (
+            <FiEyeOff className="eye_icon" />
+          )}
         </div>
       ),
     },
     {
       label: 'Подтверждение пароля',
       name: 'confirmPassword',
-      type: isShowConfirmPassword ? 'text' : 'password',
+      type: showPassword.confirmPassword ? 'text' : 'password',
       placeholder: 'Пароль еще раз',
       autoComplete: 'new-password',
       extra: (
-        <div className="password_eye" onClick={toggleConfirmPasswordVisibility}>
-          {isShowConfirmPassword ? <FiEye className="eye_icon" /> : <FiEyeOff className="eye_icon" />}
+        <div onClick={() => togglePasswordVisibility('confirmPassword')}>
+          {showPassword.confirmPassword ? (
+            <FiEye className="eye_icon" />
+          ) : (
+            <FiEyeOff className="eye_icon" />
+          )}
         </div>
       ),
     },
@@ -135,21 +142,15 @@ const RegisterPage = () => {
           {({ isSubmitting }) => (
             <Form>
               {inputFields.map((field) => (
-                <div
+                <InputField
                   key={field.name}
-                  className={
-                    field.name.includes('password') ? 'password-input-wrapper' : ''
-                  }
-                >
-                  <InputField
-                    label={field.label}
-                    name={field.name}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    autoComplete={field.autoComplete}
-                  />
-                  {field.extra}
-                </div>
+                  label={field.label}
+                  name={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  autoComplete={field.autoComplete}
+                  extra={field.extra}
+                />
               ))}
 
               {serverError && (

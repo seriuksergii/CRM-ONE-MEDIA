@@ -71,17 +71,17 @@ form input::placeholder {
   color: #787987;
   opacity: 0.7;
 }
-
-.password-input-wrapper {
+.input-field-input {
   position: relative;
 }
+
 .password_eye {
   position: absolute;
   right: 13px;
-  top: 58%;
+  top: 0px;
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
 }
 
 .eye_icon {
