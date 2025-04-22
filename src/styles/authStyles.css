@@ -16,7 +16,6 @@
   width: 540px;
   border-radius: 16px;
   padding-bottom: 30px;
-  
 }
 
 .logo {
@@ -27,15 +26,15 @@
 .login_title {
   font: 600 32px/150% 'Inter', sans-serif;
   color: #121311;
- 
- 
 }
+
 h3 {
   font: 400 16px/150% 'Inter', sans-serif;
   color: #595b58;
   padding-bottom: 20px;
   text-align: center;
 }
+
 form {
   display: flex;
   flex-direction: column;
@@ -68,7 +67,6 @@ form input {
   box-sizing: border-box;
 }
 
-
 form input::placeholder {
   color: #787987;
   opacity: 0.7;
@@ -87,8 +85,6 @@ form input::placeholder {
   z-index: 2;
 }
 
-
-
 .eye_icon {
   font-size: 20px;
   opacity: 0.2;
@@ -100,9 +96,11 @@ form input::placeholder {
   margin: -4px 0 4px 0;
   padding-top: 10px;
 }
+
 .enter_button_link {
   text-decoration: none;
 }
+
 .enter_button {
   display: flex;
   justify-content: space-between;
@@ -138,7 +136,6 @@ form button {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  
 }
 
 .or_left,
