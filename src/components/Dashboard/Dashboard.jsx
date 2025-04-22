@@ -1,5 +1,6 @@
-import React from 'react';
-import './Dashboard.css';
+import React from "react";
+import Button from "../Button/Button";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
@@ -13,9 +14,11 @@ const Dashboard = () => {
             </p>
           </div>
           <div className="dashboardPage_header_right">
-            <button className="dashboardPage_header_button">
-              + Connect Account
-            </button>
+            <Button
+              iconLeft="plus"
+              IconClassLeft="icon"
+              text="Connect Account"
+            />
           </div>
         </div>
         <img
