@@ -2,7 +2,7 @@ import Icon from "../Icon/Icon";
 import { Link } from "react-router-dom";
 import "./Button.scss";
 
-const Button = ({
+export default function Button({
   className,
   iconLeft = "",
   IconClassLeft,
@@ -14,7 +14,7 @@ const Button = ({
   isActive = false,
   ariaLabel = false,
   to, // пропс для ссылки
-}) => {
+}) {
   const Component = to ? Link : "button";
   return (
     <Component
@@ -32,6 +32,4 @@ const Button = ({
       {iconRight && <Icon className={IconClassRight} name={iconRight} />}
     </Component>
   );
-};
-
-export default Button;
+}
