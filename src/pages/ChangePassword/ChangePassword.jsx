@@ -4,7 +4,7 @@ import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/authStyles.css';
 import { useDispatch } from 'react-redux';
-import { changePassword } from '../../api/api';
+import { changePassword } from '../../store/slices/authSlice';
 import './ChangePassword.css';
 
 const ChangePassword = () => {

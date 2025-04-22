@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 import '../../styles/authStyles.css';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../api/api';
+import { registerUser } from '../../store/slices/authSlice';
 
 const RegisterPage = () => {
   const navigate = useNavigate();

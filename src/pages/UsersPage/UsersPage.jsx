@@ -5,7 +5,7 @@ import {
   updateUserRoleAndTeam,
   deleteUser,
   getTeams,
-} from '../../api/api';
+} from '../../store/slices/usersSlice';
 import './UsersPage.css';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';

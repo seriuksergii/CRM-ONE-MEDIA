@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { logoutUser } from '../../api/api';
+import { logoutUser } from '../../store/slices/authSlice';
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import '../../styles/dashdoardStyles.css';

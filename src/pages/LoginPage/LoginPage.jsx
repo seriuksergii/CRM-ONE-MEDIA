@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import '../../styles/authStyles.css';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../api/api';
+import { loginUser } from '../../store/slices/authSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();

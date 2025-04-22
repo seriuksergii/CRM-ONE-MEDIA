@@ -1,11 +1,122 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  getAllUsers,
-  updateUserRoleAndTeam,
-  deleteUser,
-  getTeams,
-  getCurrentUserProfile,
-} from '../../api/api';
+import { API_ENDPOINTS } from '../../api/api';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const getAllUsers = createAsyncThunk(
+  'users/getAll',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(API_ENDPOINTS.USERS.BASE);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to fetch users'
+      );
+    }
+  }
+);
+
+export const getUserById = createAsyncThunk(
+  'users/getById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(API_ENDPOINTS.USERS.BY_ID(id));
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to fetch user'
+      );
+    }
+  }
+);
+
+export const updateUserRole = createAsyncThunk(
+  'users/updateRole',
+  async ({ id, role }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(API_ENDPOINTS.USERS.ROLE(id), { role });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to update role'
+      );
+    }
+  }
+);
+
+export const updateUserRoleAndTeam = createAsyncThunk(
+  'users/updateRoleAndTeam',
+  async ({ id, role, team }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(API_ENDPOINTS.USERS.ROLE_AND_TEAM(id), {
+        role,
+        team,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to update user'
+      );
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  'users/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(API_ENDPOINTS.USERS.BY_ID(id));
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to delete user'
+      );
+    }
+  }
+);
+
+export const getTeams = createAsyncThunk(
+  'users/getTeams',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(API_ENDPOINTS.USERS.TEAMS);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to fetch teams'
+      );
+    }
+  }
+);
+
+export const getCurrentUserProfile = createAsyncThunk(
+  'users/getCurrentProfile',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(API_ENDPOINTS.USERS.PROFILE.ME);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to fetch profile'
+      );
+    }
+  }
+);
+
+export const getRoles = createAsyncThunk(
+  'users/getRoles',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(API_ENDPOINTS.USERS.ROLES);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to fetch roles'
+      );
+    }
+  }
+);
 
 const initialState = {
   users: [],

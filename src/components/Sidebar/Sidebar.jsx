@@ -8,7 +8,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { VscGraph } from "react-icons/vsc";
 import { FiUsers } from 'react-icons/fi';
 import { MdOutlineSwitchAccount } from "react-icons/md";
-import { getCurrentUserProfile } from '../../api/api';
+import { getCurrentUserProfile } from '../../store/slices/usersSlice';
 import '../../styles/dashdoardStyles.css';
 
 const Sidebar = ({ isSidebarCollapsed, toggleSidebar }) => {
