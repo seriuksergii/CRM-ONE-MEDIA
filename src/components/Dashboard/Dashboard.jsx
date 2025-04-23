@@ -1,8 +1,12 @@
-import React from "react";
+import { useState } from "react";
+
 import Button from "../Button/Button";
+import PopUp from "../PopUp/PopUp";
+
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div className="dashboardPage_wrapper">
@@ -18,7 +22,14 @@ const Dashboard = () => {
               iconLeft="plus"
               IconClassLeft="icon"
               text="Connect Account"
+              onClick={() => setIsOpen(!isOpen)}
             />
+            {isOpen ? (
+              <PopUp onClose={() => setIsOpen(false)}>
+                {" "}
+                <Button text="test" />{" "}
+              </PopUp>
+            ) : null}
           </div>
         </div>
         <img
