@@ -138,10 +138,13 @@ const LoginPage = () => {
           console.log('Submitted:', values);
         }}
       >
-        {() => (
+        {({ submitForm }) => (
           <Form className="add-offer-form">
-            <ToggleSwitch name="isSubscribed" disabled={false} />
-            <button type="submit">Submit</button>
+            <ToggleSwitch
+              name="isSubscribed"
+              disabled={false}
+              submitForm={submitForm}
+            />
           </Form>
         )}
       </Formik>
