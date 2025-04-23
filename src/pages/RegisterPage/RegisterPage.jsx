@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import './RegisterPage.css';
+import './RegisterPage.scss';
 import '../../styles/authStyles.css';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/slices/authSlice';
