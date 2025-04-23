@@ -141,6 +141,7 @@ const LoginPage = () => {
         {() => (
           <Form className="add-offer-form">
             <ToggleSwitch name="isSubscribed" disabled={false} />
+            <button type="submit">Submit</button>
           </Form>
         )}
       </Formik>
