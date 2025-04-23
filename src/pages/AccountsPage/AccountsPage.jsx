@@ -3,6 +3,7 @@ import SelectButtonGroup from '../../components/SelectButtonGroup/SelectButtonGr
 import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
 import { Formik, Form } from 'formik';
 import './AccountsPage.scss';
+import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -13,6 +14,10 @@ const AccountsPage = () => {
 
   return (
     <div className="accounts-page">
+      <HeaderTitle
+        title="Ad Accounts"
+        subtitle="Manage and monitor your Facebook ad campaigns"
+      />
       <div className="select-buttons">
         <SelectButtonGroup
           defaultValue={activeTab}

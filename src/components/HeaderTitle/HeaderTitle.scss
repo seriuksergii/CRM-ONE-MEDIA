@@ -1,0 +1,14 @@
+@use '../../assets/variable.scss' as *;
+
+.page-header {
+  padding: 24px;
+  &-title {
+    font: 700 24px/32px 'Inter', sans-serif;
+    color: $text-primary;
+  }
+
+  &-subtitle {
+    font: 400 16px/21px 'Inter', sans-serif;
+    color: #71717A;
+  }
+}
