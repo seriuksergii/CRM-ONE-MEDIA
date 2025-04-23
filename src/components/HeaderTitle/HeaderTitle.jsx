@@ -1,12 +1,14 @@
 import React from 'react';
-import './HeaderTitle.scss';
+import { HeadingXL, HeadingMD } from '../Typography/Headlines&Texts';
 import '../../../src/reset.css';
+import './HeaderTitle.scss';
+
 
 const HeaderTitle = ({ title, subtitle }) => {
   return (
     <div className="page-header">
-      <h1 className='page-header-title'>{title}</h1>
-      {subtitle && <p className='page-header-subtitle'>{subtitle}</p>}
+      <HeadingXL>{title}</HeadingXL>
+      {subtitle && <HeadingMD>{subtitle}</HeadingMD>}
     </div>
   );
 };

@@ -1,0 +1,41 @@
+$font-family-base: 'Inter', sans-serif;
+
+.typography {
+  font-family: $font-family-base;
+}
+
+.heading-xl {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.heading-lg {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.heading-md {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.body-base {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.body-small {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.label-small {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 16px;
+}
