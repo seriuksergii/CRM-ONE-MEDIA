@@ -71,18 +71,17 @@ form input::placeholder {
   color: #787987;
   opacity: 0.7;
 }
-
-.password_input_wrapper {
+.input-field-input {
   position: relative;
 }
 
 .password_eye {
   position: absolute;
   right: 13px;
-  top: 50%;
+  top: 0px;
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 2;
+  z-index: 100;
 }
 
 .eye_icon {
@@ -140,7 +139,7 @@ form button {
 
 .or_left,
 .or_right {
-  height: 1px;
+  height: 1.2px;
   width: 100%;
   background: #c3c5c0;
 }
@@ -159,6 +158,10 @@ form button {
   align-items: center;
   width: 50%;
   gap: 8px;
+}
+
+.social_button:nth-last-child(1) {
+  background-color: #1877f2;
 }
 
 .social_button p {
