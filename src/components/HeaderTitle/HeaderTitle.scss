@@ -1,0 +1,12 @@
+@use '../../assets/variable.scss' as *;
+
+.page-header {
+  padding: 24px;
+  &-title {
+    color: $text-primary;
+  }
+
+  &-subtitle {
+    color: #71717a;
+  }
+}
