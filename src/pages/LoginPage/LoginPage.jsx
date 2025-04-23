@@ -9,6 +9,7 @@ import InputField from '../../components/InputField/InputField';
 import { translateError } from '../../utils/translateError';
 import './LoginPage.scss';
 import '../../styles/authStyles.css';
+import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Некорректный email').required('Обязательное поле'),
@@ -131,6 +132,18 @@ const LoginPage = () => {
         <img src="/Frame 24051.svg" alt="" />
         <img src="/Frame 24052.svg" alt="" />
       </div>
+      <Formik
+        initialValues={{ isSubscribed: false }}
+        onSubmit={(values) => {
+          console.log('Submitted:', values);
+        }}
+      >
+        {() => (
+          <Form className="add-offer-form">
+            <ToggleSwitch name="isSubscribed" disabled={false} />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

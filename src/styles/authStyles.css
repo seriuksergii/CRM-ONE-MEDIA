@@ -128,6 +128,7 @@ form button {
   font: 400 14px/150% 'Inter', sans-serif;
   color: #fff;
   padding: 12px 20px;
+  text-align: center;
 }
 
 .or {
