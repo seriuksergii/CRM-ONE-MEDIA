@@ -13,6 +13,10 @@ export const HeadingMD = (props) => (
   <Typography variant="heading-md" tag="h3" {...props} />
 );
 
+export const BodyBase = (props) => (
+  <Typography variant="body-base" tag="p" {...props} />
+);
+
 export const BodySmall = (props) => (
   <Typography variant="body-small" tag="p" {...props} />
 );
