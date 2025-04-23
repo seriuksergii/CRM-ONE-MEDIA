@@ -1,0 +1,23 @@
+@use '../../assets/variable.scss' as *;
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
+   background-color: $blue;
+    font: 400 14px / 20px 'Inter', sans-serif;
+   color: $white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    stroke: $white;
+}
