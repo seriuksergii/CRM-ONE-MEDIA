@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import InputField from '../../components/InputField/InputField';
 import { translateError } from '../../utils/translateError';
+import { HeadingXL, HeadingMD } from '../../components/Typography/Headlines&Texts';
 import './RegisterPage.scss';
 import '../../styles/authStyles.css';
 
@@ -123,9 +124,11 @@ const RegisterPage = () => {
   return (
     <div className="auth-container">
       <div className="login_page">
-        <img src="/Mask group.png" alt="logo" className="logo" />
-        <h1 className="login_title">Регистрация</h1>
-        <h3>Пожалуйста, введите свои данные</h3>
+        <div className="login_page_title_block">
+          <img src="/Mask group.png" alt="logo" className="logo" />
+          <HeadingXL>Регистрация</HeadingXL>
+          <HeadingMD>Пожалуйста, введите свои данные</HeadingMD>
+        </div>
 
         <Formik
           initialValues={{

@@ -6,6 +6,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import InputField from '../../components/InputField/InputField';
+import { HeadingXL, HeadingMD } from '../../components/Typography/Headlines&Texts';
 import { translateError } from '../../utils/translateError';
 import './LoginPage.scss';
 import '../../styles/authStyles.css';
@@ -70,9 +71,11 @@ const LoginPage = () => {
   return (
     <div className="auth-container">
       <div className="login_page">
-        <img src="/Mask group.png" alt="logo" className="logo" />
-        <h1 className="login_title">С возвращением!</h1>
-        <h3>Пожалуйста, введите свои данные</h3>
+        <div className="login_page_title_block">
+          <img src="/Mask group.png" alt="logo" className="logo" />
+          <HeadingXL>С возвращением!</HeadingXL>
+          <HeadingMD>Пожалуйста, введите свои данные</HeadingMD>
+        </div>
 
         <Formik
           initialValues={{ email: '', password: '' }}
