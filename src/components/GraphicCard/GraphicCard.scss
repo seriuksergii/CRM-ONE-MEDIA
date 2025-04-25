@@ -28,13 +28,12 @@
     .percentage {
       display: flex;
       align-items: center;
-      gap: 3px;
       font-size: 14px;
       font-weight: 500;
 
-      img {
-        width: 14px;
-        height: 14px;
+      svg {
+        flex-shrink: 0;
+        margin-bottom: 4px;
       }
 
       &.positive {
