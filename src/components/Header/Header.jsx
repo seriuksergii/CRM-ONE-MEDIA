@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { CiSearch } from 'react-icons/ci';
-import { FiBell } from 'react-icons/fi';
-import { IoChevronDownOutline } from 'react-icons/io5';
-import { FaRegUserCircle } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import '../../styles/dashdoardStyles.css';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
+import { FiBell } from "react-icons/fi";
+import { IoChevronDownOutline } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
-const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
+import { logoutUser } from "../../store/slices/authSlice";
+
+import "../../styles/dashdoardStyles.css";
+
+const DashboardHeader = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const currentUser = useSelector((state) => state.users.currentUser);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUser());
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
@@ -55,13 +73,13 @@ const DashboardHeader = ({ searchQuery, setSearchQuery, handleLogout }) => {
               )}
             </div>
             <div className="admin_info">
-              <span className="admin_name">{currentUser?.name || 'Admin'}</span>
+              <span className="admin_name">{currentUser?.name || "Admin"}</span>
               <IoChevronDownOutline
-                className={`admin_arrow ${isDropdownOpen ? 'open' : ''}`}
+                className={`admin_arrow ${isDropdownOpen ? "open" : ""}`}
               />
             </div>
           </div>
-          <div className={`dropdown_menu ${isDropdownOpen ? 'open' : ''}`}>
+          <div className={`dropdown_menu ${isDropdownOpen ? "open" : ""}`}>
             {currentUser?.email && (
               <div className="dropdown_item email_item">
                 {currentUser.email}
