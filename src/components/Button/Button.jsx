@@ -4,13 +4,13 @@ import "./Button.scss";
 
 export default function Button({
   className,
-  iconLeft = "",
-  IconClassLeft,
-  text,
+  iconLeft = false,
+  IconClassLeft = "",
+  text = "",
   iconRight = "",
-  IconClassRight,
+  IconClassRight = "",
   onClick,
-  type,
+  type = "button",
   isActive = false,
   ariaLabel = false,
   to, // пропс для ссылки
