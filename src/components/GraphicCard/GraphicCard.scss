@@ -1,0 +1,54 @@
+.graphic-card {
+  position: relative;
+  margin: 20px;
+  width: 100%;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', sans-serif;
+
+  .chart-container {
+    height: 140px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .header {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+
+    .percentage {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 14px;
+      font-weight: 500;
+
+      img {
+        width: 14px;
+        height: 14px;
+      }
+
+      &.positive {
+        color: #16a249;
+      }
+
+      &.negative {
+        color: #ef4444;
+      }
+
+      .vs-period {
+        color: #71717a;
+        margin-left: 4px;
+      }
+    }
+  }
+}
