@@ -6,9 +6,10 @@ import {
   deleteUser,
   getTeams,
 } from '../../store/slices/usersSlice';
-import './UsersPage.css';
+import './UsersPage.scss';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
 
 const UsersPage = () => {
   const dispatch = useDispatch();
@@ -90,8 +91,10 @@ const UsersPage = () => {
 
   return (
     <div className="users_page">
-      <h1>Users</h1>
-
+      <HeaderTitle
+        title="Users"
+        subtitle="Manage users and their access roles"
+      />
       <div className="users_table">
         <table>
           <thead>

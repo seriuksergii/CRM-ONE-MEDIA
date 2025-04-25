@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import InputField from '../../components/InputField/InputField';
+import {
+  HeadingXL,
+  HeadingMD,
+} from '../../components/Typography/Headlines&Texts';
 import './ForgotPasswordPage.scss';
 import '../../styles/authStyles.css';
 
@@ -18,12 +22,14 @@ const ForgotPasswordPage = () => {
   return (
     <div className="auth-container">
       <div className="login_page">
-        <img src="/Mask group.png" alt="logo" className="logo" />
-        <h1 className="login_title">Забыли пароль?</h1>
-        <h3 style={{ paddingInline: '20px' }}>
-          Введите email, указанный при регистрации и мы отправим ссылку для
-          сброса пароля
-        </h3>
+        <div className="login_page_title_block">
+          <img src="/Mask group.png" alt="logo" className="logo" />
+          <HeadingXL>Забыли пароль?</HeadingXL>
+          <HeadingMD>
+            Введите email, указанный при регистрации<br></br> и мы отправим
+            ссылку для сброса пароля
+          </HeadingMD>
+        </div>
 
         <Formik
           initialValues={{ email: '' }}
