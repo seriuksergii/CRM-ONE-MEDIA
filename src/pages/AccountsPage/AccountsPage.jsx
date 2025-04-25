@@ -5,6 +5,10 @@ import { Formik, Form } from 'formik';
 import './AccountsPage.scss';
 import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
+import GraphicCard from '../../components/GraphicCard/GraphicCard';
+import dataJson from '../../components/GraphicCard/data.json';
+import dataJson2 from '../../components/GraphicCard/data2.json';
+import dataJson3 from '../../components/GraphicCard/data3.json';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -15,6 +19,26 @@ const AccountsPage = () => {
 
   return (
     <div className="accounts-page">
+      <div className="graphic-cards">
+        <GraphicCard
+          data={dataJson.data}
+          name={dataJson.name}
+          unit={dataJson.unit}
+          interval={dataJson.interval}
+        />
+        <GraphicCard
+          data={dataJson2.data}
+          name={dataJson2.name}
+          unit={dataJson2.unit}
+          interval={dataJson2.interval}
+        />
+        <GraphicCard
+          data={dataJson3.data}
+          name={dataJson3.name}
+          unit={dataJson3.unit}
+          interval={dataJson3.interval}
+        />
+      </div>
       <HeaderTitle
         title="Ad Accounts"
         subtitle="Manage and monitor your Facebook ad campaigns"
