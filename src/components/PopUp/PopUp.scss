@@ -40,20 +40,3 @@
         }
 }
 
-  &__close {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .icon {
-    stroke: $text-secondary;
-  }
-}
-
