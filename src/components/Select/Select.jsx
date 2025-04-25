@@ -2,7 +2,7 @@ import SelectBase from 'react-select';
 import { useField } from 'formik';
 import './Select.scss';
 
-const Select = ({ label, name, options, required, ...props }) => {
+const Select = ({ label, name, options, ...props }) => {
   const [field, meta, helpers] = useField(name);
 
   const normalizedOptions = options.map((option) =>
@@ -19,12 +19,7 @@ const Select = ({ label, name, options, required, ...props }) => {
 
   return (
     <div className="form_group">
-      {label && (
-        <label htmlFor={name}>
-          {label}
-          {required && <span className="required">*</span>}
-        </label>
-      )}
+      {label && <label htmlFor={name}>{label}</label>}
       <SelectBase
         inputId={name}
         name={name}

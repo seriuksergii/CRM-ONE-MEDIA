@@ -102,7 +102,9 @@ const GraphicCard = ({ data, name, unit, interval }) => {
           className={`percentage ${isPositive ? 'positive' : 'negative'}`}
         >
           <svg width="16" height="16">
-            <use href={isPositive ? '#icon-positive' : '#icon-negative'} />
+            <use
+              href={`/sprite.svg#icon-${isPositive ? 'positive' : 'negative'}`}
+            />
           </svg>
           <span>{Math.abs(percentageChange).toFixed(1)}%</span>
           <span className="vs-period">vs {interval}</span>

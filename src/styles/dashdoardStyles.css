@@ -222,7 +222,7 @@
 
 .sidebar {
   width: 100%;
-  height: 98%;
+  height: 100%;
   background: #ffffffb2;
   border: 1px solid #e4e4e7;
   backdrop-filter: blur(16px);
@@ -235,7 +235,7 @@
 }
 
 .sidebar.collapsed {
-  width: 50px;
+  width: 85px;
 }
 
 .sidebar.collapsed .menu_title {
@@ -261,7 +261,7 @@
 
 .menu_toggle.collapsed {
   transform: rotate(180deg);
-  margin-right: 12px;
+  margin-right: 11px;
 }
 
 .menu_toggle svg {
@@ -310,12 +310,12 @@
 .menu_item.active .menu_icon,
 .menu_item.active .menu_label {
   color: #fafafa;
-  padding-left: 3px;
 }
 
 .menu_icon {
   font-size: 20px;
   min-width: 20px;
+  margin-left: 3px;
 }
 
 .menu_label {
@@ -330,7 +330,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px;
+  padding: 12px 12px 0 12px;
   border-top: 1px solid #e4e4e7;
 }
 
@@ -361,7 +361,7 @@
 
 .main_content {
   position: absolute;
-  top: 83px;
+  top: 0;
   right: 0;
   left: 255px;
 

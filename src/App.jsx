@@ -1,21 +1,18 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
-import "./App.css";
+import './App.css';
 
-
-import Layout from "./components/Layout/Layout";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
-import Dashboard from "./components/Dashboard/Dashboard";
-import ChangePassword from "./pages/ChangePassword/ChangePassword";
-import UsersPage from "./pages/UsersPage/UsersPage";
-import CampaignsPage from "./pages/CampaignsPage/CampaignsPage";
-import AnalyticsPage from "./pages/AnalyticsPage/AnalyticsPage";
-import AccountsPage from "./pages/AccountsPage/AccountsPage";
-import SettingsPage from "./pages/SettingsPage/SettingsPage";
-import Sprite from './assets/Sprite.jsx';
-
+import Layout from './components/Layout/Layout';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage';
+import Dashboard from './components/Dashboard/Dashboard';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
+import UsersPage from './pages/UsersPage/UsersPage';
+import CampaignsPage from './pages/CampaignsPage/CampaignsPage';
+import AnalyticsPage from './pages/AnalyticsPage/AnalyticsPage';
+import AccountsPage from './pages/AccountsPage/AccountsPage';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 function App() {
   return (
@@ -25,7 +22,6 @@ function App() {
         v7_relativeSplatPath: true,
       }}
     >
-      <Sprite />
       <Routes>
         <Route path="/" element={<Navigate to="/register" replace />} />
         <Route path="/login" element={<LoginPage />} />
