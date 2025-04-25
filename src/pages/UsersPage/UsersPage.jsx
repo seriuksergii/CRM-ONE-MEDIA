@@ -8,8 +8,11 @@ import {
 } from '../../store/slices/usersSlice';
 import './UsersPage.scss';
 import { toast } from 'react-hot-toast';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
+import Select from '../../components/Select/Select';
 
 const UsersPage = () => {
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ const UsersPage = () => {
     setSelectedUser(user);
     setEditForm({
       role: user.role === 'bayer' ? 'buyer' : user.role,
-      team: user.team || '',
+      team: user.team?.id || '',
     });
     setIsEditModalOpen(true);
   };
@@ -49,13 +52,13 @@ const UsersPage = () => {
     return error;
   };
 
-  const handleUpdateUser = async () => {
+  const handleUpdateUser = async (values) => {
     try {
       await dispatch(
         updateUserRoleAndTeam({
           id: selectedUser.id,
-          role: editForm.role,
-          team: editForm.team,
+          role: values.role,
+          team_id: values.team,
         })
       ).unwrap();
 
@@ -89,6 +92,15 @@ const UsersPage = () => {
     return role;
   };
 
+  const validationSchema = Yup.object().shape({
+    role: Yup.string().required('Обовʼязкове поле'),
+  });
+
+  const teamOptions = teams.map((team) => ({
+    value: team.id,
+    label: team.name,
+  }));
+
   return (
     <div className="users_page">
       <HeaderTitle
@@ -113,7 +125,7 @@ const UsersPage = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{formatRoleForDisplay(user.role)}</td>
-                  <td>{user.team}</td>
+                  <td>{user.team?.name || ''}</td>
                   <td>
                     <button onClick={() => handleEditUser(user)}>Edit</button>
                     <button onClick={() => handleDeleteUser(user.id)}>
@@ -130,43 +142,39 @@ const UsersPage = () => {
         <div className="edit_modal">
           <div className="modal_content">
             <h2>Edit User</h2>
-            <div className="form_group">
-              <label>Role:</label>
-              <select
-                value={editForm.role || ''}
-                onChange={(e) =>
-                  setEditForm({ ...editForm, role: e.target.value })
-                }
-              >
-                <option value="">Select Role</option>
-                {availableRoles.map((role) => (
-                  <option key={role} value={role}>
-                    {role}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form_group">
-              <label>Team:</label>
-              <select
-                value={editForm.team || ''}
-                onChange={(e) =>
-                  setEditForm({ ...editForm, team: e.target.value })
-                }
-              >
-                <option value="">Select Team</option>
-                {Array.isArray(teams) &&
-                  teams.map((team) => (
-                    <option key={team} value={team}>
-                      {team}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <div className="modal_actions">
-              <button onClick={handleUpdateUser}>Save</button>
-              <button onClick={() => setIsEditModalOpen(false)}>Cancel</button>
-            </div>
+            <Formik
+              initialValues={editForm}
+              validationSchema={validationSchema}
+              onSubmit={handleUpdateUser}
+              enableReinitialize
+            >
+              <Form>
+                <Select
+                  label="Role"
+                  name="role"
+                  options={availableRoles.map((role) => ({
+                    value: role,
+                    label: role.charAt(0).toUpperCase() + role.slice(1),
+                  }))}
+                  required
+                />
+                <Select
+                  label="Team"
+                  name="team"
+                  options={teamOptions}
+                  required
+                />
+                <div className="modal_actions">
+                  <button type="submit">Save</button>
+                  <button
+                    type="button"
+                    onClick={() => setIsEditModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </Form>
+            </Formik>
           </div>
         </div>
       )}

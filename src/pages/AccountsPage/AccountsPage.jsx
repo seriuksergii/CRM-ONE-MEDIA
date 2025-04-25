@@ -3,6 +3,7 @@ import SelectButtonGroup from '../../components/SelectButtonGroup/SelectButtonGr
 import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
 import { Formik, Form } from 'formik';
 import './AccountsPage.scss';
+import Select from '../../components/Select/Select';
 import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
 import GraphicCard from '../../components/GraphicCard/GraphicCard';
@@ -19,6 +20,10 @@ const AccountsPage = () => {
 
   return (
     <div className="accounts-page">
+      <HeaderTitle
+        title="Ad Accounts"
+        subtitle="Manage and monitor your Facebook ad campaigns"
+      />
       <div className="graphic-cards">
         <GraphicCard
           data={dataJson.data}
@@ -39,10 +44,7 @@ const AccountsPage = () => {
           interval={dataJson3.interval}
         />
       </div>
-      <HeaderTitle
-        title="Ad Accounts"
-        subtitle="Manage and monitor your Facebook ad campaigns"
-      />
+
       <div className="select-buttons">
         <SelectButtonGroup
           defaultValue={activeTab}
@@ -103,6 +105,31 @@ const AccountsPage = () => {
         step={5}
         initialValues={[0, 200]}
       />
+      <Formik
+        initialValues={{ role: '', team: '' }}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        <Form>
+          <Select
+            name="role"
+            label="Role"
+            options={['admin', 'buyer', 'team_lead']}
+            required
+          />
+          <Select
+            name="team"
+            label="Team"
+            options={[
+              { value: 'team-a', label: 'Team A' },
+              { value: 'team-b', label: 'Team B' },
+            ]}
+            required
+          />
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
     </div>
   );
 };

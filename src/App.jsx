@@ -13,6 +13,7 @@ import CampaignsPage from './pages/CampaignsPage/CampaignsPage';
 import AnalyticsPage from './pages/AnalyticsPage/AnalyticsPage';
 import AccountsPage from './pages/AccountsPage/AccountsPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
+import Sprite from './assets/Sprite.jsx';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         v7_relativeSplatPath: true,
       }}
     >
+      <Sprite />
       <Routes>
         <Route path="/" element={<Navigate to="/register" replace />} />
         <Route path="/login" element={<LoginPage />} />
