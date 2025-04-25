@@ -156,14 +156,8 @@ const UsersPage = () => {
                     value: role,
                     label: role.charAt(0).toUpperCase() + role.slice(1),
                   }))}
-                  required
                 />
-                <Select
-                  label="Team"
-                  name="team"
-                  options={teamOptions}
-                  required
-                />
+                <Select label="Team" name="team" options={teamOptions} />
                 <div className="modal_actions">
                   <button type="submit">Save</button>
                   <button

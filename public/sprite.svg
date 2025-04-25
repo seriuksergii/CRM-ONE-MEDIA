@@ -12,4 +12,11 @@
 <path d="M1.78003 4.5L3.78003 2.5L5.78003 4.5" stroke="#64748B" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M3.78003 2.5V10.5" stroke="#64748B" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
+<symbol id="icon-positive" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 4l-8 8h6v8h4v-8h6z"/>
+  </symbol>
+  
+  <symbol id="icon-negative" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 20l8-8h-6V4h-4v8H4z"/>
+  </symbol>
 </svg>
