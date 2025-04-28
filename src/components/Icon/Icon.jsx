@@ -1,6 +1,6 @@
 import "./Icon.scss";
-const Icon = ({ name, className }) => (
-  <svg className={className}>
+const Icon = ({ name, className, stroke = "" }) => (
+  <svg className={className} style={{ stroke: stroke }}>
     <use xlinkHref={`/sprite.svg#${name}`} />
   </svg>
 );

@@ -5,12 +5,14 @@ import './Button.scss';
 export default function Button({
   className,
   iconLeft = false,
-  IconClassLeft = '',
-  text = '',
-  iconRight = '',
-  IconClassRight = '',
+
+  IconClassLeft = "",
+  text = "",
+  iconRight = "",
+  IconClassRight = "",
   onClick,
-  type = 'button',
+  type = "button",
+
   isActive = false,
   ariaLabel = false,
   to, // пропс для ссылки
