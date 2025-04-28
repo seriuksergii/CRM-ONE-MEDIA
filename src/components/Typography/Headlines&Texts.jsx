@@ -24,3 +24,7 @@ export const BodySmall = (props) => (
 export const LabelSmall = (props) => (
   <Typography variant="label-small" tag="span" {...props} />
 );
+
+export const LabelXS = (props) => (
+  <Typography variant="label-xs" tag="span" {...props} />
+);

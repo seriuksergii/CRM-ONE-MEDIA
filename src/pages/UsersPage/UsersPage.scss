@@ -16,6 +16,29 @@
   font: 400 14px/20px 'Inter', sans-serif;
 }
 
+.users_page {
+  .users_actions {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+      color: white;
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: darken(#0066CC, 10%);
+      }
+    }
+  }
+}
+
 .users_table {
   background: #fff;
   border-radius: 8px;
@@ -98,34 +121,3 @@
   }
 }
 
-.modal_actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 24px;
-
-  button {
-    padding: 8px 16px;
-    border-radius: 36px;
-    font: 500 14px/20px 'Inter', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: none;
-
-    &:first-child {
-      width: 50%;
-      background: #46a122;
-      color: #fff;
-    }
-
-    &:last-child {
-      width: 50%;
-      background: #d4320e;
-      color: #fff;
-    }
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-}

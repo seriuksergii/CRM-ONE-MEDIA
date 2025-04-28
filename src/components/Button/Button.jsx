@@ -1,26 +1,26 @@
-import Icon from "../Icon/Icon";
-import { Link } from "react-router-dom";
-import "./Button.scss";
+import Icon from '../Icon/Icon';
+import { Link } from 'react-router-dom';
+import './Button.scss';
 
 export default function Button({
   className,
-  iconLeft = "",
-  IconClassLeft,
-  text,
-  iconRight = "",
-  IconClassRight,
+  iconLeft = false,
+  IconClassLeft = '',
+  text = '',
+  iconRight = '',
+  IconClassRight = '',
   onClick,
-  type,
+  type = 'button',
   isActive = false,
   ariaLabel = false,
   to, // пропс для ссылки
 }) {
-  const Component = to ? Link : "button";
+  const Component = to ? Link : 'button';
   return (
     <Component
       type={type}
-      className={`btn ${className ? className : ""} ${
-        isActive ? "active" : ""
+      className={`btn ${className ? className : ''} ${
+        isActive ? 'active' : ''
       }`}
       onClick={onClick}
       to={to}
