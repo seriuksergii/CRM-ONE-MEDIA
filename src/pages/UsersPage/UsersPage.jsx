@@ -8,16 +8,17 @@ import {
 } from '../../store/slices/usersSlice';
 import './UsersPage.scss';
 import { toast } from 'react-hot-toast';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
-import Select from '../../components/Select/Select';
+import ChangeUserRole from '../../components/Modals/ChangeUserRole/ChangeUserRole';
+import Button from '../../components/Button/Button';
+import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 
 const UsersPage = () => {
   const dispatch = useDispatch();
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const [editForm, setEditForm] = useState({
     role: '',
     team: '',
@@ -84,6 +85,10 @@ const UsersPage = () => {
     }
   };
 
+  const handleInviteUser = () => {
+    setIsAddUserModalOpen(true);
+  };
+
   if (loading) return <div className="users_loading">Loading...</div>;
   if (error) return <div className="users_error">{error}</div>;
 
@@ -91,10 +96,6 @@ const UsersPage = () => {
     if (role === 'bayer') return 'buyer';
     return role;
   };
-
-  const validationSchema = Yup.object().shape({
-    role: Yup.string().required('Обовʼязкове поле'),
-  });
 
   const teamOptions = teams.map((team) => ({
     value: team.id,
@@ -107,6 +108,16 @@ const UsersPage = () => {
         title="Users"
         subtitle="Manage users and their access roles"
       />
+
+      <div className="users_actions">
+        <Button
+          className="btn-primary"
+          text="Invite User"
+          onClick={handleInviteUser}
+          style={{ backgroundColor: '#0066CC' }}
+        />
+      </div>
+
       <div className="users_table">
         <table>
           <thead>
@@ -138,40 +149,21 @@ const UsersPage = () => {
         </table>
       </div>
 
-      {isEditModalOpen && (
-        <div className="edit_modal">
-          <div className="modal_content">
-            <h2>Edit User</h2>
-            <Formik
-              initialValues={editForm}
-              validationSchema={validationSchema}
-              onSubmit={handleUpdateUser}
-              enableReinitialize
-            >
-              <Form>
-                <Select
-                  label="Role"
-                  name="role"
-                  options={availableRoles.map((role) => ({
-                    value: role,
-                    label: role.charAt(0).toUpperCase() + role.slice(1),
-                  }))}
-                />
-                <Select label="Team" name="team" options={teamOptions} />
-                <div className="modal_actions">
-                  <button type="submit">Save</button>
-                  <button
-                    type="button"
-                    onClick={() => setIsEditModalOpen(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </Form>
-            </Formik>
-          </div>
-        </div>
-      )}
+      <ChangeUserRole
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        initialValues={editForm}
+        teamOptions={teamOptions}
+        availableRoles={availableRoles}
+        onSave={handleUpdateUser}
+        currentUserName={selectedUser?.name}
+      />
+      <AddNewUser
+        isOpen={isAddUserModalOpen}
+        onClose={() => setIsAddUserModalOpen(false)}
+        availableRoles={availableRoles}
+        teamOptions={teamOptions}
+      />
     </div>
   );
 };

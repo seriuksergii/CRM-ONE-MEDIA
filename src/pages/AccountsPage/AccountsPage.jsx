@@ -10,13 +10,22 @@ import GraphicCard from '../../components/GraphicCard/GraphicCard';
 import dataJson from '../../components/GraphicCard/data.json';
 import dataJson2 from '../../components/GraphicCard/data2.json';
 import dataJson3 from '../../components/GraphicCard/data3.json';
+import Button from '../../components/Button/Button';
+import InviteNewTeamMember from '../../components/Modals/InviteNewTeamMember/InviteNewTeamMember';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
+  const [isInviteTeamModalOpen, setInviteTeamModalOpen] = useState(false);
 
   const handleSelectionChange = (value) => {
     setActiveTab(value);
   };
+
+  const handleInviteUser = () => {
+    setInviteTeamModalOpen(true);
+  };
+
+  const availableRoles = ['admin', 'head', 'team_lead', 'buyer'];
 
   return (
     <div className="accounts-page">
@@ -105,6 +114,17 @@ const AccountsPage = () => {
         step={5}
         initialValues={[0, 200]}
       />
+      <Button
+        className="btn-primary"
+        text="Invite User"
+        onClick={handleInviteUser}
+        style={{ backgroundColor: '#0066CC' }}
+      />
+      <InviteNewTeamMember
+        isOpen={isInviteTeamModalOpen}
+        onClose={() => setInviteTeamModalOpen(false)}
+        availableRoles={availableRoles}
+      />
       <Formik
         initialValues={{ role: '', team: '' }}
         onSubmit={(values) => {
@@ -117,6 +137,10 @@ const AccountsPage = () => {
             label="Role"
             options={['admin', 'buyer', 'team_lead']}
             required
+            menuPlacement="auto"
+            menuShouldScrollIntoView={false}
+            menuPosition="fixed"
+            menuShouldBlockScroll={true}
           />
           <Select
             name="team"
