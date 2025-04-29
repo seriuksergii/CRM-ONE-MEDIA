@@ -21,7 +21,7 @@
     margin-bottom: 20px;
     display: flex;
     justify-content: flex-end;
-    
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -31,9 +31,9 @@
       font-weight: 500;
       color: white;
       transition: background-color 0.2s;
-      
+
       &:hover {
-        background-color: darken(#0066CC, 10%);
+        background-color: (#0066cc, 10%);
       }
     }
   }
@@ -120,4 +120,3 @@
     }
   }
 }
-

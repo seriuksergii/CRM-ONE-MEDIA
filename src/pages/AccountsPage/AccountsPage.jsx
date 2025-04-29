@@ -12,10 +12,13 @@ import dataJson2 from '../../components/GraphicCard/data2.json';
 import dataJson3 from '../../components/GraphicCard/data3.json';
 import Button from '../../components/Button/Button';
 import InviteNewTeamMember from '../../components/Modals/InviteNewTeamMember/InviteNewTeamMember';
+import ConnectFBAdAccount from '../../components/Modals/ConnectFBAdAccount/ConnectFBAdAccount';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
   const [isInviteTeamModalOpen, setInviteTeamModalOpen] = useState(false);
+  const [isConnectAccountModalOpen, setConnectAccountModalOpen] =
+    useState(false);
 
   const handleSelectionChange = (value) => {
     setActiveTab(value);
@@ -23,6 +26,10 @@ const AccountsPage = () => {
 
   const handleInviteUser = () => {
     setInviteTeamModalOpen(true);
+  };
+
+  const handleConnectAccount = () => {
+    setConnectAccountModalOpen(true);
   };
 
   const availableRoles = ['admin', 'head', 'team_lead', 'buyer'];
@@ -120,9 +127,21 @@ const AccountsPage = () => {
         onClick={handleInviteUser}
         style={{ backgroundColor: '#0066CC' }}
       />
+
       <InviteNewTeamMember
         isOpen={isInviteTeamModalOpen}
         onClose={() => setInviteTeamModalOpen(false)}
+        availableRoles={availableRoles}
+      />
+      <Button
+        className="btn-primary"
+        text="Connect Account"
+        onClick={handleConnectAccount}
+        style={{ backgroundColor: '#0066CC' }}
+      />
+      <ConnectFBAdAccount
+        isOpen={isConnectAccountModalOpen}
+        onClose={() => setConnectAccountModalOpen(false)}
         availableRoles={availableRoles}
       />
       <Formik

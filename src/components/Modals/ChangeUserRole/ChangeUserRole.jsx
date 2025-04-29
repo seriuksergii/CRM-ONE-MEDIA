@@ -28,7 +28,7 @@ const ChangeUserRole = ({
   return (
     <div className="edit_modal">
       <div className="modal_content">
-        <button className="modal_close_button" onClick={onClose}>
+        <button type="button" className="modal_close_button" onClick={onClose}>
           <IoClose size={24} />
         </button>
         <div className="modal_title">
@@ -52,8 +52,24 @@ const ChangeUserRole = ({
                 }))}
                 menuPlacement="auto"
                 menuShouldScrollIntoView={false}
-                menuPosition="fixed"
+                menuPosition="static"
                 menuShouldBlockScroll={true}
+                styles={{
+                  menu: (provided) => ({
+                    ...provided,
+                    position: 'relative',
+                    boxShadow: 'none',
+                    border: '1px solid #e4e4e7',
+                    marginTop: '4px',
+                  }),
+                  control: (provided) => ({
+                    ...provided,
+                    boxShadow: 'none',
+                    '&:hover': {
+                      borderColor: '#0066cc',
+                    },
+                  }),
+                }}
               />
             </div>
 

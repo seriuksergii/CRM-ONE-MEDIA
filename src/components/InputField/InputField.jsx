@@ -10,6 +10,7 @@ const InputField = ({
   autocomplete,
   className = '',
   extra,
+  showError = true,
 }) => {
   return (
     <div className={`input-field ${className}`}>
@@ -27,9 +28,11 @@ const InputField = ({
           {extra && <div className="input-field-extra">{extra}</div>}
         </div>
       </label>
-      <ErrorMessage name={name}>
-        {(msg) => <div className="input-field-error">{msg}</div>}
-      </ErrorMessage>
+      {showError && (
+        <ErrorMessage name={name}>
+          {(msg) => <div className="input-field-error">{msg}</div>}
+        </ErrorMessage>
+      )}
     </div>
   );
 };

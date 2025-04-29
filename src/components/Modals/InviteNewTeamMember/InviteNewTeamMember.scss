@@ -85,7 +85,7 @@
 
   .input-field {
     input {
-      border: 1px solid #e4e4e7; 
+      border: 1px solid #e4e4e7;
       border-radius: 10px;
       transition: border 0.2s;
 
@@ -137,4 +137,18 @@
 
 .checkbox-container label {
   color: #09090b;
+}
+
+.checkbox-text {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.checkbox-label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 2px;
 }
