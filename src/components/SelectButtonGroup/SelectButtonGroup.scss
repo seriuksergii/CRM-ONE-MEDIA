@@ -1,34 +1,24 @@
 @use '../../assets/variable.scss' as *;
 
 .select-button-group {
-  display: flex; // Изменяем на flex
-  width: 100%; // Занимает всю ширину
-  gap: 0; // Убираем промежутки между кнопками
-  margin-inline: 0; // Убираем боковые отступы
+  display: flex;
+  width: 100%;
+  gap: 0;
+  margin-inline: 0;
   border-radius: 10px;
   padding: 4px;
-  background: #f1f5f9;
+  background: $bg-tab;
 }
 
 .select-button {
   flex: 1;
-  font: 400 16px/100% 'Inter', sans-serif;
+  font: 400 14px/100% 'Inter', sans-serif;
   text-align: center;
   color: $text-secondary;
   padding: 10px 0;
   transition: box-shadow 0.3s ease, color 0.3s ease;
-  border-radius: 0;
+  border-radius: 8px;
   margin: 0;
-}
-
-.select-button:first-child {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-}
-
-.select-button:last-child {
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
 }
 
 .select-button.selected {
