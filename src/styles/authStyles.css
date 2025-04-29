@@ -127,7 +127,7 @@ form button {
   border-radius: 38px;
   font: 600 16px/150% 'Inter', sans-serif;
   cursor: pointer;
-  width: 35%;
+  width: auto;
   transition: background-color 0.3s;
 }
 
