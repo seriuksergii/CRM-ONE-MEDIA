@@ -1,3 +1,5 @@
+@use '../../assets/variable.scss' as *;
+
 .input-field {
   margin-bottom: 16px;
 
@@ -19,6 +21,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
+    background-color: $white;
 
     &:focus {
       outline: none;

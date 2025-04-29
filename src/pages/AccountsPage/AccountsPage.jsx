@@ -14,14 +14,13 @@ import Button from '../../components/Button/Button';
 import InviteNewTeamMember from '../../components/Modals/InviteNewTeamMember/InviteNewTeamMember';
 import PopUp from '../../components/PopUp/PopUp';
 import ConnectFBAdAccount from '../../components/Modals/ConnectFBAdAccount/ConnectFBAdAccount';
-
-
+import ChangeUserRole from '../../components/Modals/ChangeUserRole/ChangeUserRole';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
   const [isInviteTeamModalOpen, setInviteTeamModalOpen] = useState(false);
-  const [isConnectAccountModalOpen, setConnectAccountModalOpen] =
-    useState(false);
+  const [isConnectAccountModalOpen, setConnectAccountModalOpen] = useState(false);
+  const [isChangeRoleModalOpen, setChangeRoleModalOpen] = useState(false);
 
   const handleSelectionChange = (value) => {
     setActiveTab(value);
@@ -35,12 +34,22 @@ const AccountsPage = () => {
     setConnectAccountModalOpen(true);
   };
 
+  const handleChangeRole = () => {
+    setChangeRoleModalOpen(true);
+  };
+
   const handleSaveAccount = (values) => {
     console.log('Save account:', values);
     setConnectAccountModalOpen(false);
   };
 
+  const handleSaveRole = (values) => {
+    console.log('Save role:', values);
+    setChangeRoleModalOpen(false);
+  };
+
   const availableRoles = ['admin', 'head', 'team_lead', 'buyer'];
+  const testUser = { name: 'John Doe', role: 'buyer' };
 
   return (
     <div className="accounts-page">
@@ -129,24 +138,43 @@ const AccountsPage = () => {
         step={5}
         initialValues={[0, 200]}
       />
-      <Button
-        className="btn-primary"
-        text="Invite User"
-        onClick={handleInviteUser}
-        style={{ backgroundColor: '#0066CC' }}
-      />
+      
+      <div className="action-buttons">
+        <Button
+          className="btn-primary"
+          text="Invite User"
+          onClick={handleInviteUser}
+          style={{ backgroundColor: '#0066CC' }}
+        />
+        <Button
+          className="btn-primary"
+          text="Connect Account"
+          onClick={handleConnectAccount}
+          style={{ backgroundColor: '#0066CC' }}
+        />
+        <Button
+          className="btn-primary"
+          text="Change User Role"
+          onClick={handleChangeRole}
+          style={{ backgroundColor: '#0066CC' }}
+        />
+      </div>
 
-      <InviteNewTeamMember
-        isOpen={isInviteTeamModalOpen}
-        onClose={() => setInviteTeamModalOpen(false)}
-        availableRoles={availableRoles}
-      />
-      <Button
-        className="btn-primary"
-        text="Connect Account"
-        onClick={handleConnectAccount}
-        style={{ backgroundColor: '#0066CC' }}
-      />
+      {/* Модалка запрошення користувача */}
+      {isInviteTeamModalOpen && (
+        <PopUp onClose={() => setInviteTeamModalOpen(false)}>
+          <InviteNewTeamMember
+            onSave={(values) => {
+              console.log('Invite user:', values);
+              setInviteTeamModalOpen(false);
+            }}
+            onClose={() => setInviteTeamModalOpen(false)}
+            availableRoles={availableRoles}
+          />
+        </PopUp>
+      )}
+
+      {/* Модалка підключення акаунта */}
       {isConnectAccountModalOpen && (
         <PopUp onClose={() => setConnectAccountModalOpen(false)}>
           <ConnectFBAdAccount
@@ -156,6 +184,20 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
+
+      {/* Модалка зміни ролі користувача */}
+      {isChangeRoleModalOpen && (
+        <PopUp onClose={() => setChangeRoleModalOpen(false)}>
+          <ChangeUserRole
+            onSave={handleSaveRole}
+            onClose={() => setChangeRoleModalOpen(false)}
+            initialValues={{ role: testUser.role }}
+            availableRoles={availableRoles}
+            currentUserName={testUser.name}
+          />
+        </PopUp>
+      )}
+
       <Formik
         initialValues={{ role: '', team: '' }}
         onSubmit={(values) => {

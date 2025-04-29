@@ -7,12 +7,9 @@ import {
 } from '../../Typography/Headlines&Texts';
 import * as Yup from 'yup';
 import Select from '../../Select/Select';
-import './ChangeUserRole.scss';
 import Button from '../../Button/Button';
-import { IoClose } from 'react-icons/io5';
 
 const ChangeUserRole = ({
-  isOpen,
   onClose,
   initialValues,
   availableRoles,
@@ -23,71 +20,64 @@ const ChangeUserRole = ({
     role: Yup.string().required('Обовʼязкове поле'),
   });
 
-  if (!isOpen) return null;
-
   return (
-    <div className="edit_modal">
-      <div className="modal_content">
-        <button type="button" className="modal_close_button" onClick={onClose}>
-          <IoClose size={24} />
-        </button>
-        <div className="modal_title">
-          <HeadingXL>Change User Role</HeadingXL>
-          <HeadingMD>Change the role for {currentUserName}.</HeadingMD>
-        </div>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={(values) => onSave(values)}
-          enableReinitialize
-        >
-          <Form>
-            <div className="select-container">
-              <Select
-                label="Role"
-                name="role"
-                options={availableRoles.map((role) => ({
-                  value: role,
-                  label: role.charAt(0).toUpperCase() + role.slice(1),
-                }))}
-                menuPlacement="auto"
-                menuShouldScrollIntoView={false}
-                menuPosition="static"
-                menuShouldBlockScroll={true}
-                styles={{
-                  menu: (provided) => ({
-                    ...provided,
-                    position: 'relative',
-                    boxShadow: 'none',
-                    border: '1px solid #e4e4e7',
-                    marginTop: '4px',
-                  }),
-                  control: (provided) => ({
-                    ...provided,
-                    boxShadow: 'none',
-                    '&:hover': {
-                      borderColor: '#0066cc',
-                    },
-                  }),
-                }}
-              />
-            </div>
-
-            <LabelXS style={{ color: '#64748B' }}>
-              Can manage campaigns, accounts, and perform cloning operations
-            </LabelXS>
-            <div className="modal_buttons">
-              <Button
-                type="button"
-                text="Cancel"
-                onClick={onClose}
-                className="white"
-              />
-              <Button type="submit" text="Save Changes" />
-            </div>
-          </Form>
-        </Formik>
+    <div className="change_role_modal">
+      <div className="modal_title">
+        <HeadingXL>Change User Role</HeadingXL>
+        <HeadingMD>Change the role for {currentUserName}.</HeadingMD>
       </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values) => onSave(values)}
+        enableReinitialize
+      >
+        <Form>
+          <div className="select-container">
+            <Select
+              label="Role"
+              name="role"
+              options={availableRoles.map((role) => ({
+                value: role,
+                label: role.charAt(0).toUpperCase() + role.slice(1),
+              }))}
+              menuPlacement="auto"
+              menuShouldScrollIntoView={false}
+              menuPosition="static"
+              menuShouldBlockScroll={true}
+              styles={{
+                menu: (provided) => ({
+                  ...provided,
+                  position: 'relative',
+                  boxShadow: 'none',
+                  border: '1px solid #e4e4e7',
+                  marginTop: '4px',
+                }),
+                control: (provided) => ({
+                  ...provided,
+                  boxShadow: 'none',
+                  '&:hover': {
+                    borderColor: '#0066cc',
+                  },
+                }),
+              }}
+            />
+          </div>
+
+          <LabelXS style={{ color: '#64748B' }}>
+            Can manage campaigns, accounts, and perform cloning operations
+          </LabelXS>
+          <div className="modal_buttons">
+            <Button
+              type="button"
+              text="Cancel"
+              onClick={onClose}
+              className="white"
+            />
+            <Button type="submit" text="Save Changes" />
+          </div>
+        </Form>
+      </Formik>
     </div>
   );
 };
