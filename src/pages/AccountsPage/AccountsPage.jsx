@@ -12,7 +12,10 @@ import dataJson2 from '../../components/GraphicCard/data2.json';
 import dataJson3 from '../../components/GraphicCard/data3.json';
 import Button from '../../components/Button/Button';
 import InviteNewTeamMember from '../../components/Modals/InviteNewTeamMember/InviteNewTeamMember';
+import PopUp from '../../components/PopUp/PopUp';
 import ConnectFBAdAccount from '../../components/Modals/ConnectFBAdAccount/ConnectFBAdAccount';
+
+
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -30,6 +33,11 @@ const AccountsPage = () => {
 
   const handleConnectAccount = () => {
     setConnectAccountModalOpen(true);
+  };
+
+  const handleSaveAccount = (values) => {
+    console.log('Save account:', values);
+    setConnectAccountModalOpen(false);
   };
 
   const availableRoles = ['admin', 'head', 'team_lead', 'buyer'];
@@ -139,11 +147,15 @@ const AccountsPage = () => {
         onClick={handleConnectAccount}
         style={{ backgroundColor: '#0066CC' }}
       />
-      <ConnectFBAdAccount
-        isOpen={isConnectAccountModalOpen}
-        onClose={() => setConnectAccountModalOpen(false)}
-        availableRoles={availableRoles}
-      />
+      {isConnectAccountModalOpen && (
+        <PopUp onClose={() => setConnectAccountModalOpen(false)}>
+          <ConnectFBAdAccount
+            onSave={handleSaveAccount}
+            onClose={() => setConnectAccountModalOpen(false)}
+            initialValues={{ accessToken: '' }}
+          />
+        </PopUp>
+      )}
       <Formik
         initialValues={{ role: '', team: '' }}
         onSubmit={(values) => {
