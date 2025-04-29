@@ -51,104 +51,106 @@ const ConnectFBAdAccount = ({ onSave, onClose, initialValues }) => {
         />
         <div className="tab-content">
           {activeTab === 'a' && (
-            <Formik
-              initialValues={initialValues || { accessToken: '' }}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-              enableReinitialize
-            >
-              {({ isSubmitting, errors, touched }) => (
-                <Form>
-                  <div>
-                    <InputField
-                      label="Access Token"
-                      name="accessToken"
-                      placeholder="Paste your Facebook access token here"
-                      type="text"
-                      className={`access_token_input ${
-                        errors.accessToken && touched.accessToken
-                          ? 'has-error'
-                          : ''
-                      }`}
-                      showError={false}
-                      extra={
-                        <svg
-                          className={`token_icon ${
-                            errors.accessToken && touched.accessToken
-                              ? 'error'
-                              : ''
-                          }`}
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.2713 7.3698L13.6805 8.77898C13.795 8.89124 13.949 8.95412 14.1094 8.95412C14.2698 8.95412 14.4237 8.89124 14.5383 8.77898L15.8249 7.49233C15.9372 7.3778 16.0001 7.22382 16.0001 7.06345C16.0001 6.90308 15.9372 6.7491 15.8249 6.63457L14.4157 5.22538M15.6411 4L9.75928 9.88182"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M7.3698 15.64C9.23088 15.64 10.7396 14.1313 10.7396 12.2702C10.7396 10.4091 9.23088 8.90039 7.3698 8.90039C5.50871 8.90039 4 10.4091 4 12.2702C4 14.1313 5.50871 15.64 7.3698 15.64Z"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      }
-                    />
-
-                    {errors.accessToken && touched.accessToken && (
-                      <div className="input-field-error">
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="#DC2626"
-                        >
-                          <path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 9c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-.5-7h1v4h-1V3zm0 5h1v1h-1V8z" />
-                        </svg>
-                        {errors.accessToken}
-                      </div>
-                    )}
-                    <div className="access_token_info">
-                      <LabelSmall>How to get your access token:</LabelSmall>
-                      <ol className="access_token_steps">
-                        <li>
-                          Go to{' '}
-                          <a
-                            href="https://developers.facebook.com/tools/explorer/"
-                            target="_blank"
-                            rel="noopener noreferrer"
+            <div className="connect-fb-ad-account">
+              <Formik
+                initialValues={initialValues || { accessToken: '' }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+                enableReinitialize
+              >
+                {({ isSubmitting, errors, touched }) => (
+                  <Form>
+                    <div>
+                      <InputField
+                        label="Access Token"
+                        name="accessToken"
+                        placeholder="Paste your Facebook access token here"
+                        type="text"
+                        className={`access_token_input ${
+                          errors.accessToken && touched.accessToken
+                            ? 'has-error'
+                            : ''
+                        }`}
+                        showError={false}
+                        extra={
+                          <svg
+                            className={`token_icon ${
+                              errors.accessToken && touched.accessToken
+                                ? 'error'
+                                : ''
+                            }`}
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            Graph API Explorer
-                          </a>
-                        </li>
-                        <li>Select your app from the dropdown</li>
-                        <li>Generate a User or Page token</li>
-                        <li>Request permissions: ads_management, ads_read</li>
-                        <li>Copy the generated token</li>
-                      </ol>
-                    </div>
-                    <div className="form_buttons">
-                      <Button
-                        type="button"
-                        text="Cancel"
-                        onClick={onClose}
-                        className="white"
+                            <path
+                              d="M12.2713 7.3698L13.6805 8.77898C13.795 8.89124 13.949 8.95412 14.1094 8.95412C14.2698 8.95412 14.4237 8.89124 14.5383 8.77898L15.8249 7.49233C15.9372 7.3778 16.0001 7.22382 16.0001 7.06345C16.0001 6.90308 15.9372 6.7491 15.8249 6.63457L14.4157 5.22538M15.6411 4L9.75928 9.88182"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M7.3698 15.64C9.23088 15.64 10.7396 14.1313 10.7396 12.2702C10.7396 10.4091 9.23088 8.90039 7.3698 8.90039C5.50871 8.90039 4 10.4091 4 12.2702C4 14.1313 5.50871 15.64 7.3698 15.64Z"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        }
                       />
-                      <Button
-                        type="submit"
-                        text="Connect Account"
-                        disabled={isSubmitting}
-                      />
+
+                      {errors.accessToken && touched.accessToken && (
+                        <div className="input-field-error">
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 12 12"
+                            fill="#DC2626"
+                          >
+                            <path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 9c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-.5-7h1v4h-1V3zm0 5h1v1h-1V8z" />
+                          </svg>
+                          {errors.accessToken}
+                        </div>
+                      )}
+                      <div className="access_token_info">
+                        <LabelSmall>How to get your access token:</LabelSmall>
+                        <ol className="access_token_steps">
+                          <li>
+                            Go to{' '}
+                            <a
+                              href="https://developers.facebook.com/tools/explorer/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Graph API Explorer
+                            </a>
+                          </li>
+                          <li>Select your app from the dropdown</li>
+                          <li>Generate a User or Page token</li>
+                          <li>Request permissions: ads_management, ads_read</li>
+                          <li>Copy the generated token</li>
+                        </ol>
+                      </div>
+                      <div className="form_buttons">
+                        <Button
+                          type="button"
+                          text="Cancel"
+                          onClick={onClose}
+                          className="white"
+                        />
+                        <Button
+                          type="submit"
+                          text="Connect Account"
+                          disabled={isSubmitting}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+                  </Form>
+                )}
+              </Formik>
+            </div>
           )}
           {activeTab === 'b' && (
             <div>
