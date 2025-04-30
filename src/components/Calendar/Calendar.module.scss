@@ -1,0 +1,166 @@
+@use '../../assets/variable.scss' as *;
+
+.calendarContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.calendarWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  font-family: sans-serif;
+  padding: 0 16px 16px;
+  width: fit-content;
+  background: white;
+  box-shadow: 0px 2px 8px 0px #00000026;
+  border-radius: 2px;
+  margin-top: 8px;
+  box-shadow: 0px -1px 0px 0px #f0f0f0 inset;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.okButton {
+  padding: 8px 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.months {
+  font: 400 14px/28px 'Inter', sans-serif;
+  display: flex;
+  gap: 16px;
+  color: #000000d9;
+}
+
+.monthContainer {
+  width: 280px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.dayName {
+  font: 400 14px/28px 'Inter', sans-serif;
+  text-align: center;
+}
+
+.dayCell {
+  font: 400 14px/22px 'Inter', sans-serif;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #000000d9;
+  box-sizing: border-box;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.today {
+  border: 1px solid #1976d2;
+}
+
+.rangeStart,
+.rangeEnd {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.inRange {
+  background-color: #cee5f8;
+  color: #000;
+}
+
+.toggleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  vertical-align: middle;
+
+  &:hover {
+    border-color: #999;
+  }
+}
+
+.calendarIcon,
+.arrowIcon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.dateText {
+  font: 400 14px/1 'Inter', sans-serif;
+  color: $text-primary;
+  display: inline-block;
+  padding-top: 4px;
+}
+.monthHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  box-shadow: 0px -1px 0px 0px #f0f0f0 inset;
+  padding-bottom: 5px;
+}
+
+.monthTitle {
+  flex: 1;
+  text-align: center;
+  font: 400 14px/22px 'Inter', sans-serif;
+  color: #000000d9;
+}
+
+.monthControls {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    display: block;
+  }
+}

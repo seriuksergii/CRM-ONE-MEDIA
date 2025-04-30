@@ -18,6 +18,8 @@ import ChangeUserRole from '../../components/Modals/ChangeUserRole/ChangeUserRol
 import CreateNewPermission from '../../components/Modals/CreateNewPermission/CreateNewPermission';
 import SendInvitation from '../../components/Modals/SendInvitation/SendInvitation';
 import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
+import Calendar from '../../components/Calendar/Calendar';
+import { MdMargin } from 'react-icons/md';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -102,6 +104,8 @@ const AccountsPage = () => {
           interval={dataJson3.interval}
         />
       </div>
+
+      <Calendar />
 
       <div className="select-buttons">
         <SelectButtonGroup
@@ -304,6 +308,7 @@ const AccountsPage = () => {
           <button type="submit">Submit</button>
         </Form>
       </Formik>
+      
     </div>
   );
 };
