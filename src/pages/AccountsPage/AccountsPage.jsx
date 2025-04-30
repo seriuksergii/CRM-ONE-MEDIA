@@ -15,12 +15,21 @@ import InviteNewTeamMember from '../../components/Modals/InviteNewTeamMember/Inv
 import PopUp from '../../components/PopUp/PopUp';
 import ConnectFBAdAccount from '../../components/Modals/ConnectFBAdAccount/ConnectFBAdAccount';
 import ChangeUserRole from '../../components/Modals/ChangeUserRole/ChangeUserRole';
+import CreateNewPermission from '../../components/Modals/CreateNewPermission/CreateNewPermission';
+import SendInvitation from '../../components/Modals/SendInvitation/SendInvitation';
+import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
   const [isInviteTeamModalOpen, setInviteTeamModalOpen] = useState(false);
-  const [isConnectAccountModalOpen, setConnectAccountModalOpen] = useState(false);
+  const [isConnectAccountModalOpen, setConnectAccountModalOpen] =
+    useState(false);
   const [isChangeRoleModalOpen, setChangeRoleModalOpen] = useState(false);
+  const [isCreatePermissionModalOpen, setCreatePermissionModalOpen] =
+    useState(false);
+  const [isSendInvitationModalOpen, setSendInvitationModalOpen] =
+    useState(false);
+  const [isAddNewUserModalOpen, setAddNewUserModalOpen] = useState(false);
 
   const handleSelectionChange = (value) => {
     setActiveTab(value);
@@ -30,12 +39,23 @@ const AccountsPage = () => {
     setInviteTeamModalOpen(true);
   };
 
+  const handleSendInvitation = () => {
+    setSendInvitationModalOpen(true);
+  };
+
   const handleConnectAccount = () => {
     setConnectAccountModalOpen(true);
+  };
+  const handleAddNewUser = () => {
+    setAddNewUserModalOpen(true);
   };
 
   const handleChangeRole = () => {
     setChangeRoleModalOpen(true);
+  };
+
+  const handleCreatePermission = () => {
+    setCreatePermissionModalOpen(true);
   };
 
   const handleSaveAccount = (values) => {
@@ -46,6 +66,11 @@ const AccountsPage = () => {
   const handleSaveRole = (values) => {
     console.log('Save role:', values);
     setChangeRoleModalOpen(false);
+  };
+
+  const handleSavePermission = (values) => {
+    console.log('Save permission:', values);
+    setCreatePermissionModalOpen(false);
   };
 
   const availableRoles = ['admin', 'head', 'team_lead', 'buyer'];
@@ -138,7 +163,7 @@ const AccountsPage = () => {
         step={5}
         initialValues={[0, 200]}
       />
-      
+
       <div className="action-buttons">
         <Button
           className="btn-primary"
@@ -158,9 +183,26 @@ const AccountsPage = () => {
           onClick={handleChangeRole}
           style={{ backgroundColor: '#0066CC' }}
         />
+        <Button
+          className="btn-primary"
+          text="Create Permission"
+          onClick={handleCreatePermission}
+          style={{ backgroundColor: '#0066CC' }}
+        />
+        <Button
+          className="btn-primary"
+          text="Send Invitation"
+          onClick={handleSendInvitation}
+          style={{ backgroundColor: '#0066CC' }}
+        />
+        <Button
+          className="btn-primary"
+          text="Add New User"
+          onClick={handleAddNewUser}
+          style={{ backgroundColor: '#0066CC' }}
+        />
       </div>
 
-      {/* Модалка запрошення користувача */}
       {isInviteTeamModalOpen && (
         <PopUp onClose={() => setInviteTeamModalOpen(false)}>
           <InviteNewTeamMember
@@ -174,7 +216,19 @@ const AccountsPage = () => {
         </PopUp>
       )}
 
-      {/* Модалка підключення акаунта */}
+      {isSendInvitationModalOpen && (
+        <PopUp onClose={() => setSendInvitationModalOpen(false)}>
+          <SendInvitation
+            onSave={(values) => {
+              console.log('Send invitation:', values);
+              setSendInvitationModalOpen(false);
+            }}
+            onClose={() => setSendInvitationModalOpen(false)}
+            availableRoles={availableRoles}
+          />
+        </PopUp>
+      )}
+
       {isConnectAccountModalOpen && (
         <PopUp onClose={() => setConnectAccountModalOpen(false)}>
           <ConnectFBAdAccount
@@ -185,7 +239,6 @@ const AccountsPage = () => {
         </PopUp>
       )}
 
-      {/* Модалка зміни ролі користувача */}
       {isChangeRoleModalOpen && (
         <PopUp onClose={() => setChangeRoleModalOpen(false)}>
           <ChangeUserRole
@@ -194,6 +247,30 @@ const AccountsPage = () => {
             initialValues={{ role: testUser.role }}
             availableRoles={availableRoles}
             currentUserName={testUser.name}
+          />
+        </PopUp>
+      )}
+
+      {isCreatePermissionModalOpen && (
+        <PopUp onClose={() => setCreatePermissionModalOpen(false)}>
+          <CreateNewPermission
+            onSave={handleSavePermission}
+            onClose={() => setCreatePermissionModalOpen(false)}
+            availableRoles={availableRoles}
+          />
+        </PopUp>
+      )}
+
+      {isAddNewUserModalOpen && (
+        <PopUp onClose={() => setAddNewUserModalOpen(false)}>
+          <AddNewUser
+            isOpen={isAddNewUserModalOpen}
+            onSave={(values) => {
+              console.log('Add new user:', values);
+              setAddNewUserModalOpen(false);
+            }}
+            onClose={() => setAddNewUserModalOpen(false)}
+            availableRoles={availableRoles}
           />
         </PopUp>
       )}

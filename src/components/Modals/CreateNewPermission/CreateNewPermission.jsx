@@ -5,18 +5,16 @@ import { HeadingXL, HeadingMD } from '../../Typography/Headlines&Texts';
 import Select from '../../Select/Select';
 import InputField from '../../InputField/InputField';
 import Button from '../../Button/Button';
-import { IoClose } from 'react-icons/io5';
-import './AddNewUser.scss';
 
-const AddNewUser = ({
-  isOpen,
+import './CreateNewPermission.scss';
+
+const CreateNewPermission = ({
   onClose,
   initialValues = {
     name: '',
-    email: '',
-    role: '',
+    description: '',
+    category: '',
   },
-  availableRoles = [],
   onSave,
 }) => {
   const validationSchema = Yup.object().shape({
@@ -24,59 +22,48 @@ const AddNewUser = ({
       .required('Required field')
       .min(2, 'Minimum 2 characters')
       .max(30, 'Maximum 30 characters'),
-    email: Yup.string()
-      .email('Invalid email format')
-      .required('Required field'),
-    role: Yup.string().required('Required field'),
+    description: Yup.string().required('Required field'),
+    category: Yup.string().required('Required field'),
   });
-
-  if (!isOpen) return null;
 
   const inputFields = [
     {
-      label: 'Full Name',
+      label: 'Permission Name',
       name: 'name',
       type: 'text',
-      placeholder: 'John Doe',
-      autoComplete: 'name',
+      placeholder: 'e.g., Export Reports',
     },
     {
-      label: 'Email Address',
-      name: 'email',
-      type: 'email',
-      placeholder: 'john.doe@example.com',
-      autoComplete: 'email',
+      label: 'Description',
+      name: 'description',
+      type: 'text',
+      placeholder: 'What does this permission allow?',
     },
   ];
 
-  const roleOptions = availableRoles.map((role) => ({
-    value: role,
-    label: role.charAt(0).toUpperCase() + role.slice(1),
-  }));
+  const categoryOptions = [
+    { value: 'dashboard', label: 'Dashboard' },
+    { value: 'campaigns', label: 'Campaigns' },
+    { value: 'analytics', label: 'Analytics' },
+    { value: 'accounts', label: 'Accounts' },
+    { value: 'settings', label: 'Settings' },
+  ];
 
   return (
-    <div className="edit_modal">
-      <div className="modal_content">
-        <button
-          type="button"
-          className="modal_close_button"
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          <IoClose size={24} />
-        </button>
+    <div className="create_new_permission">
+      <div className="modal_title">
+        <HeadingXL>Create New Permission</HeadingXL>
+        <HeadingMD styles={{ color: '#64748B' }}>
+          Define a new permission for specific system functionality
+        </HeadingMD>
+      </div>
 
-        <div className="modal_title">
-          <HeadingXL>Add New User</HeadingXL>
-          <HeadingMD style={{ color: '#64748B' }}>
-            Enter user details and assign a role to add them to the system.
-          </HeadingMD>
-        </div>
-
+      <div className="formik_form">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
+            console.log('Form submitted with values:', values);
             onSave(values);
             setSubmitting(false);
           }}
@@ -95,17 +82,16 @@ const AddNewUser = ({
                   />
                 </div>
               ))}
-
               <div className="select-container">
                 <Select
-                  label="Assign Role"
-                  name="role"
-                  options={roleOptions}
+                  label="Category"
+                  name="category"
+                  options={categoryOptions}
                   menuPlacement="auto"
                   menuShouldScrollIntoView={false}
                   menuPosition="static"
                   menuShouldBlockScroll={true}
-                  placeholder="Select a role"
+                  placeholder="Select a category"
                   styles={{
                     menu: (provided) => ({
                       ...provided,
@@ -117,11 +103,13 @@ const AddNewUser = ({
                     control: (provided) => ({
                       ...provided,
                       boxShadow: 'none',
+                      '&:hover': {
+                        borderColor: '#0066cc',
+                      },
                     }),
                   }}
                 />
               </div>
-
               <div className="modal_buttons">
                 <Button
                   type="button"
@@ -132,7 +120,7 @@ const AddNewUser = ({
                 />
                 <Button
                   type="submit"
-                  text={'Add User'}
+                  text={'Create Permission'}
                   disabled={isSubmitting}
                 />
               </div>
@@ -144,4 +132,4 @@ const AddNewUser = ({
   );
 };
 
-export default AddNewUser;
+export default CreateNewPermission;

@@ -1,9 +1,19 @@
 @use '../../../assets/variable.scss' as *;
 
 .change_role_modal {
+  .form {
+    gap: 0px;
+  }
   .form_group label {
-    margin-top: 24px;
+    padding-top: 24px;
     font: 400 14px/100% 'Inter', sans-serif;
     color: $text-primary;
+  }
+
+  .modal_buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+    gap: 12px;
   }
 }
