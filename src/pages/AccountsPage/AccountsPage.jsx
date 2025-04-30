@@ -20,6 +20,7 @@ import SendInvitation from '../../components/Modals/SendInvitation/SendInvitatio
 import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 import Calendar from '../../components/Calendar/Calendar';
 import { MdMargin } from 'react-icons/md';
+import Dropdown from '../../components/Dropdown/Dropdown';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -106,6 +107,7 @@ const AccountsPage = () => {
       </div>
 
       <Calendar />
+      
 
       <div className="select-buttons">
         <SelectButtonGroup
@@ -127,6 +129,8 @@ const AccountsPage = () => {
           {activeTab === 'e' && <div>Содержимое пятой вкладки</div>}
         </div>
       </div>
+
+      <Dropdown />
 
       <Formik
         initialValues={{ isSubscribed: false }}
