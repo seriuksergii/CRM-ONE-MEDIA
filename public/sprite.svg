@@ -45,4 +45,26 @@
   <path d="M6 3V6L8 7"
         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
+  <symbol id="calendar" viewBox="0 0 16 17" fill="none">
+  <path d="M5.3335 1.83398V4.50065" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10.6665 1.83398V4.50065" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12.6667 3.16602H3.33333C2.59695 3.16602 2 3.76297 2 4.49935V13.8327C2 14.5691 2.59695 15.166 3.33333 15.166H12.6667C13.403 15.166 14 14.5691 14 13.8327V4.49935C14 3.76297 13.403 3.16602 12.6667 3.16602Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M2 7.16602H14" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+<symbol id="chevron-down" viewBox="0 0 16 17" fill="none">
+  <path d="M4 6.5L8 10.5L12 6.5" stroke="#09090B" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+<symbol id="chevron-up" viewBox="0 0 16 17" fill="none">
+  <path d="M4 10.5L8 6.5L12 10.5" stroke="#09090B" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+<symbol id="arrow-left-small" viewBox="0 0 7 10" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.06042 1.06066L4.99976 0L-0.000244141 5L4.99976 10L6.06042 8.93934L2.12108 5L6.06042 1.06066Z" fill="currentColor" fill-opacity="0.25"/>
+</symbol>
+<symbol id="arrow-right-small" viewBox="0 0 7 10" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.939575 1.06066L2.00024 0L7.00024 5L2.00024 10L0.939575 8.93934L4.87891 5L0.939575 1.06066Z" fill="currentColor" fill-opacity="0.25"/>
+</symbol>
+
 </svg>
+
+
+
