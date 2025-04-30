@@ -1,0 +1,44 @@
+@use '../../../assets/variable.scss' as *;
+
+.invite_team_member {
+  .input-field-label span {
+    margin-top: 24px;
+    font: 400 14px/100% 'Inter', sans-serif;
+  }
+  .input-field-input {
+    border: 1px solid $border;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 8px 13px;
+    &::placeholder {
+      font: 400 14px/100% 'Inter', sans-serif;
+      color: $text-secondary;
+    }
+    &:focus {
+      border: 1px solid $blue;
+    }
+  }
+  .permissions-section {
+    font: 400 14px/100% 'Inter', sans-serif;
+    color: $text-primary;
+  }
+
+  .checkbox-container .checkbox-text {
+    font: 400 14px/100% 'Inter', sans-serif;
+    color: $text-primary;
+    margin-left: 5px;
+    padding-top: 3px;
+  }
+  .modal_buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .form_group label {
+    color: $text-primary;
+  }
+  .form_group .custom-select__option {
+    padding: 7px;
+  }
+}

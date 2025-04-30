@@ -8,6 +8,7 @@ import {
 import * as Yup from 'yup';
 import Select from '../../Select/Select';
 import Button from '../../Button/Button';
+import './ChangeUserRole.scss';
 
 const ChangeUserRole = ({
   onClose,
