@@ -21,6 +21,7 @@ import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 import Calendar from '../../components/Calendar/Calendar';
 import { MdMargin } from 'react-icons/md';
 import Dropdown from '../../components/Dropdown/Dropdown';
+import Notification from '../../components/Notifications/Notifications';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -107,7 +108,6 @@ const AccountsPage = () => {
       </div>
 
       <Calendar />
-      
 
       <div className="select-buttons">
         <SelectButtonGroup
@@ -312,7 +312,13 @@ const AccountsPage = () => {
           <button type="submit">Submit</button>
         </Form>
       </Formik>
-      
+      <Notification type="warning" />
+
+      <Notification type="positive" />
+
+      <Notification type="neutral" />
+
+      <Notification type="negative" />
     </div>
   );
 };
