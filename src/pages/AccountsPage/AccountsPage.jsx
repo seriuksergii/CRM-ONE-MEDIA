@@ -19,9 +19,10 @@ import CreateNewPermission from '../../components/Modals/CreateNewPermission/Cre
 import SendInvitation from '../../components/Modals/SendInvitation/SendInvitation';
 import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 import Calendar from '../../components/Calendar/Calendar';
-import { MdMargin } from 'react-icons/md';
 import Dropdown from '../../components/Dropdown/Dropdown';
-import Notification from '../../components/Notifications/Notifications';
+import SmallNotifications from '../../components/Notifications/SmallNotifications/SmallNotifications';
+import BigNotifications from '../../components/Notifications/BigNotifications/BigNotifications';
+import Enable2FA from '../../components/Notifications/Enable2FA/Enable2FA';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -312,13 +313,19 @@ const AccountsPage = () => {
           <button type="submit">Submit</button>
         </Form>
       </Formik>
-      <Notification type="warning" />
+      <SmallNotifications type="warning" />
 
-      <Notification type="positive" />
+      <SmallNotifications type="positive" />
 
-      <Notification type="neutral" />
+      <SmallNotifications type="neutral" />
 
-      <Notification type="negative" />
+      <SmallNotifications type="negative" />
+
+      <BigNotifications type="warning" />
+      <BigNotifications type="positive" />
+      <BigNotifications type="neutral" />
+      <BigNotifications type="negative" />
+      <Enable2FA type="enable" />
     </div>
   );
 };

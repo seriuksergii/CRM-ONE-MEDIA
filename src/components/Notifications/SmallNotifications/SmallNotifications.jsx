@@ -1,6 +1,6 @@
 import React from 'react';
-import { LabelSmall } from '../../components/Typography/Headlines&Texts';
-import styles from './Notification.module.scss';
+import { LabelSmall } from '../../Typography/Headlines&Texts';
+import styles from './SmallNotifications.module.scss';
 
 const NOTIFICATION_CONFIG = {
   warning: {
@@ -37,7 +37,7 @@ const NOTIFICATION_CONFIG = {
   },
 };
 
-const Notification = ({ 
+const SmallNotifications = ({ 
   type = 'neutral', 
   count = 0, 
   expired = 0 
@@ -64,4 +64,4 @@ const Notification = ({
   );
 };
 
-export default React.memo(Notification);
+export default React.memo(SmallNotifications);
