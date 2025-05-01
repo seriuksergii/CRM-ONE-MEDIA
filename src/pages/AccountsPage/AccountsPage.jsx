@@ -20,9 +20,7 @@ import SendInvitation from '../../components/Modals/SendInvitation/SendInvitatio
 import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 import Calendar from '../../components/Calendar/Calendar';
 import Dropdown from '../../components/Dropdown/Dropdown';
-import SmallNotifications from '../../components/Notifications/SmallNotifications/SmallNotifications';
-import BigNotifications from '../../components/Notifications/BigNotifications/BigNotifications';
-import Enable2FA from '../../components/Notifications/Enable2FA/Enable2FA';
+import Notification from '../../components/Notifications/Notification';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -107,9 +105,7 @@ const AccountsPage = () => {
           interval={dataJson3.interval}
         />
       </div>
-
       <Calendar />
-
       <div className="select-buttons">
         <SelectButtonGroup
           defaultValue={activeTab}
@@ -130,9 +126,7 @@ const AccountsPage = () => {
           {activeTab === 'e' && <div>Содержимое пятой вкладки</div>}
         </div>
       </div>
-
       <Dropdown />
-
       <Formik
         initialValues={{ isSubscribed: false }}
         onSubmit={(values) => {
@@ -172,7 +166,6 @@ const AccountsPage = () => {
         step={5}
         initialValues={[0, 200]}
       />
-
       <div className="action-buttons">
         <Button
           className="btn-primary"
@@ -211,7 +204,6 @@ const AccountsPage = () => {
           style={{ backgroundColor: '#0066CC' }}
         />
       </div>
-
       {isInviteTeamModalOpen && (
         <PopUp onClose={() => setInviteTeamModalOpen(false)}>
           <InviteNewTeamMember
@@ -224,7 +216,6 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
-
       {isSendInvitationModalOpen && (
         <PopUp onClose={() => setSendInvitationModalOpen(false)}>
           <SendInvitation
@@ -237,7 +228,6 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
-
       {isConnectAccountModalOpen && (
         <PopUp onClose={() => setConnectAccountModalOpen(false)}>
           <ConnectFBAdAccount
@@ -247,7 +237,6 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
-
       {isChangeRoleModalOpen && (
         <PopUp onClose={() => setChangeRoleModalOpen(false)}>
           <ChangeUserRole
@@ -259,7 +248,6 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
-
       {isCreatePermissionModalOpen && (
         <PopUp onClose={() => setCreatePermissionModalOpen(false)}>
           <CreateNewPermission
@@ -269,7 +257,6 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
-
       {isAddNewUserModalOpen && (
         <PopUp onClose={() => setAddNewUserModalOpen(false)}>
           <AddNewUser
@@ -283,7 +270,6 @@ const AccountsPage = () => {
           />
         </PopUp>
       )}
-
       <Formik
         initialValues={{ role: '', team: '' }}
         onSubmit={(values) => {
@@ -313,19 +299,18 @@ const AccountsPage = () => {
           <button type="submit">Submit</button>
         </Form>
       </Formik>
-      <SmallNotifications type="warning" />
 
-      <SmallNotifications type="positive" />
+      <Notification variant="small" type="success" count={1} />
+      <Notification variant="small" type="warning" count={1} expired={1} />
+      <Notification variant="small" type="neutral" count={1} />
+      <Notification variant="small" type="error" />
 
-      <SmallNotifications type="neutral" />
+      <Notification variant="big" type="success" count={2} percent={25} />
+      <Notification variant="big" type="warning" />
+      <Notification variant="big" type="neutral" />
+      <Notification variant="big" type="error" />
 
-      <SmallNotifications type="negative" />
-
-      <BigNotifications type="warning" />
-      <BigNotifications type="positive" />
-      <BigNotifications type="neutral" />
-      <BigNotifications type="negative" />
-      <Enable2FA type="enable" />
+      <Notification variant="action" type="enable2fa" />
     </div>
   );
 };
