@@ -11,14 +11,14 @@
   left: 0;
   z-index: 1000;
   font-family: sans-serif;
-  padding: 0 16px 16px;
+  padding: 6px 16px 16px;
   width: fit-content;
   background: white;
   box-shadow: 0px 2px 8px 0px #00000026;
   border-radius: 2px;
   margin-top: 8px;
   box-shadow: 0px -1px 0px 0px #f0f0f0 inset;
-  border: 1px solid #f0f0f0;
+  border: 1px solid $border;
   display: flex;
   flex-direction: column;
 }
@@ -28,12 +28,12 @@
   justify-content: flex-end;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid $border;
 }
 
 .okButton {
   padding: 8px 16px;
-  background-color: #0066cc;
+  background-color: $blue;
   color: white;
   border: none;
   border-radius: 4px;
@@ -82,12 +82,12 @@
 }
 
 .today {
-  border: 1px solid #1976d2;
+  border: 1px solid $blue;
 }
 
 .rangeStart,
 .rangeEnd {
-  background-color: #1976d2;
+  background-color: $blue;
   color: #fff;
 }
 
@@ -102,7 +102,7 @@
   justify-content: center;
   gap: 8px;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid $border;
   border-radius: 10px;
   background: white;
   cursor: pointer;

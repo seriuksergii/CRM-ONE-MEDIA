@@ -21,6 +21,7 @@ import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
 import Calendar from '../../components/Calendar/Calendar';
 import Dropdown from '../../components/Dropdown/Dropdown';
 import Notification from '../../components/Notifications/Notification';
+import Metrics from '../../components/Metrics/Metrics';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -311,6 +312,7 @@ const AccountsPage = () => {
       <Notification variant="big" type="error" />
 
       <Notification variant="action" type="enable2fa" />
+      <Metrics /> 
     </div>
   );
 };

@@ -146,6 +146,27 @@
 <path d="M18 15.5V18.8333" stroke="#DC2626" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M18 22.1665H18.0083" stroke="#DC2626" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
+<symbol id="circle-blue" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="7" cy="7.5" r="6.5" fill="#0066CC" stroke="#E4E4E7"/>
+</symbol>
+<symbol id="circle-green" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="7" cy="7.5" r="6.5" fill="#16A34A" stroke="#E4E4E7"/>
+</symbol>
+<symbol id="circle-orange" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="7" cy="7.5" r="6.5" fill="#D97706" stroke="#E4E4E7"/>
+</symbol>
+<symbol id="circle-red" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="7" cy="7.5" r="6.5" fill="#DC2626" stroke="#E4E4E7"/>
+</symbol>
+<symbol id="circle-purple" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="7" cy="7.5" r="6.5" fill="#7C3AED" stroke="#E4E4E7"/>
+</symbol>
+<symbol id="circle-dot-blue" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="4.5" cy="4.5" r="4" fill="#0066CC" stroke="#E4E4E7"/>
+</symbol>
+<symbol id="icon-legend" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 7.00008H4.66667M4.66667 7.00008C4.66667 6.38124 4.9125 5.78775 5.35008 5.35017C5.78767 4.91258 6.38116 4.66675 7 4.66675C7.61884 4.66675 8.21233 4.91258 8.64992 5.35017C9.0875 5.78775 9.33333 6.38124 9.33333 7.00008M4.66667 7.00008C4.66667 7.61892 4.9125 8.21241 5.35008 8.65C5.78767 9.08758 6.38116 9.33342 7 9.33342C7.61884 9.33342 8.21233 9.08758 8.64992 8.65C9.0875 8.21241 9.33333 7.61892 9.33333 7.00008M9.33333 7.00008H14" stroke="#7C3AED" stroke-width="1.75"/>
+</symbol>
 
 </svg>
 
