@@ -3,7 +3,6 @@ import { LabelSmall } from '../Typography/Headlines&Texts';
 export const BADGES_CONFIG = {
   status: {
     active: {
-      icon: 'status-green-round',
       bgColor: '#E9FDF0',
       borderColor: '#C5E4CB',
       color: '#16A34A',
@@ -12,7 +11,6 @@ export const BADGES_CONFIG = {
       textComponent: LabelSmall,
     },
     paused: {
-      icon: 'status-yellow-round',
       bgColor: '#FFFBEB',
       borderColor: '#FDE68A',
       color: '#D97706',
@@ -21,7 +19,6 @@ export const BADGES_CONFIG = {
       textComponent: LabelSmall,
     },
     archived: {
-      icon: 'status-gray-round',
       bgColor: '#F0F0F0',
       borderColor: '#C8C8CB',
       color: '#3E4655',
@@ -30,7 +27,6 @@ export const BADGES_CONFIG = {
       textComponent: LabelSmall,
     },
     blocked: {
-      icon: 'status-red-round',
       bgColor: '#FDEBEC',
       borderColor: '#FFD9D9',
       color: '#DC2626',
@@ -39,7 +35,6 @@ export const BADGES_CONFIG = {
       textComponent: LabelSmall,
     },
     completed: {
-      icon: 'status-blue-round',
       bgColor: '#EAF3FF',
       borderColor: '#AAC5F9',
       color: '#0066CC',
@@ -94,7 +89,7 @@ export const BADGES_CONFIG = {
   },
   tokenStatus: {
     tokenValid: {
-      icon: 'green-clock',
+      icon: 'clock-icon',
       bgColor: '#E9FDF0',
       borderColor: '#C5E4CB',
       color: '#16A34A',
@@ -103,7 +98,7 @@ export const BADGES_CONFIG = {
       textComponent: LabelSmall,
     },
     tokenExpiringSoon: {
-      icon: 'yellow-clock',
+      icon: 'clock-icon',
       bgColor: '#FFFBEB',
       borderColor: '#FDE68A',
       color: '#D97706',
@@ -112,7 +107,7 @@ export const BADGES_CONFIG = {
       textComponent: LabelSmall,
     },
     tokenExpired: {
-      icon: 'red-clock',
+      icon: 'clock-icon',
       bgColor: '#FDEBEC',
       borderColor: '#FFD9D9',
       color: '#DC2626',
