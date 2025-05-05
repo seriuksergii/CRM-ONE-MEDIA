@@ -1,19 +1,19 @@
-import { useState } from "react";
-import Button from "../Button/Button";
-import PopUp from "../PopUp/PopUp";
+import { useState } from 'react';
+import Button from '../Button/Button';
+import PopUp from '../PopUp/PopUp';
 
-import Table from "../Table/Table";
-import ActionBar from "../Table/ActionBar";
-import CampaingsCard from "../Campaigns/CampaignsCard";
+import Table from '../Table/Table';
+import ActionBar from '../Table/ActionBar';
+import CampaingsCard from '../Campaigns/CampaignsCard';
 
-import HeaderTitle from "../HeaderTitle/HeaderTitle";
+import HeaderTitle from '../HeaderTitle/HeaderTitle';
 
-import "./Dashboard.scss";
+import './Dashboard.scss';
 
 const TableHeadData = [
   {
-    key: "campaign",
-    title: "Campaign",
+    key: 'campaign',
+    title: 'Campaign',
     sortable: true,
     render: (row) => (
       <div>
@@ -22,59 +22,59 @@ const TableHeadData = [
       </div>
     ),
   },
-  { key: "status", title: "Status", sortable: true },
-  { key: "objective", title: "Objective", sortable: true },
-  { key: "budget", title: "Budget", sortable: true },
-  { key: "spent", title: "Spent", sortable: true },
-  { key: "impressions", title: "Impressions", sortable: true },
-  { key: "clicks", title: "Clicks", sortable: true },
-  { key: "ctr", title: "CTR", sortable: true },
-  { key: "cpc ", title: "CPC ", sortable: true },
+  { key: 'status', title: 'Status', sortable: true },
+  { key: 'objective', title: 'Objective', sortable: true },
+  { key: 'budget', title: 'Budget', sortable: true },
+  { key: 'spent', title: 'Spent', sortable: true },
+  { key: 'impressions', title: 'Impressions', sortable: true },
+  { key: 'clicks', title: 'Clicks', sortable: true },
+  { key: 'ctr', title: 'CTR', sortable: true },
+  { key: 'cpc ', title: 'CPC ', sortable: true },
 ];
 const TableBodyData = [
   {
     id: 1,
-    campaign: "Campaign Alpha",
-    status: "Active",
-    objective: "Leads",
-    budget: "$500",
+    campaign: 'Campaign Alpha',
+    status: 'Active',
+    objective: 'Leads',
+    budget: '$500',
   },
   {
     id: 2,
-    campaign: "Campaign Beta",
-    status: "Paused",
-    objective: "Clicks",
-    budget: "$300",
+    campaign: 'Campaign Beta',
+    status: 'Paused',
+    objective: 'Clicks',
+    budget: '$300',
   },
 ];
 const campaingsData = [
   {
-    title: "Total Campaigns",
-    data: "7",
-    info: "Across 5 ad accounts",
-    icon: "plus",
-    stroke: "#64748B",
+    title: 'Total Campaigns',
+    data: '7',
+    info: 'Across 5 ad accounts',
+    icon: 'plus',
+    stroke: '#64748B',
   },
   {
-    title: "Total Campaigns",
-    data: "7",
-    info: "Across 5 ad accounts",
-    icon: "plus",
-    stroke: "#16A34A",
+    title: 'Total Campaigns',
+    data: '7',
+    info: 'Across 5 ad accounts',
+    icon: 'plus',
+    stroke: '#16A34A',
   },
   {
-    title: "Total Campaigns",
-    data: "7",
-    info: "Across 5 ad accounts",
-    icon: "plus",
-    stroke: "#0066CC",
+    title: 'Total Campaigns',
+    data: '7',
+    info: 'Across 5 ad accounts',
+    icon: 'plus',
+    stroke: '#0066CC',
   },
   {
-    title: "Total Campaigns",
-    data: "7",
-    info: "Across 5 ad accounts",
-    icon: "plus",
-    stroke: "#D97706",
+    title: 'Total Campaigns',
+    data: '7',
+    info: 'Across 5 ad accounts',
+    icon: 'plus',
+    stroke: '#D97706',
   },
 ];
 
@@ -127,11 +127,6 @@ const Dashboard = () => {
           ))}
         </div>
 
-        <img
-          src="/One Media Logo Main Black 1.svg"
-          alt=""
-          className="dashboardPage_logo"
-        />
         <div className="">
           <Table
             columns={TableHeadData}

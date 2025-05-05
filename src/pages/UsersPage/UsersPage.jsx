@@ -13,6 +13,7 @@ import HeaderTitle from '../../components/HeaderTitle/HeaderTitle';
 import ChangeUserRole from '../../components/Modals/ChangeUserRole/ChangeUserRole';
 import Button from '../../components/Button/Button';
 import AddNewUser from '../../components/Modals/AddNewUser/AddNewUser';
+import Loader from '../../components/Loader/Loader';
 
 const UsersPage = () => {
   const dispatch = useDispatch();
@@ -89,7 +90,10 @@ const UsersPage = () => {
     setIsAddUserModalOpen(true);
   };
 
-  if (loading) return <div className="users_loading">Loading...</div>;
+  if (loading)
+    return (
+      <Loader size={70} color="#0066CC" bgColor="rgba(255, 255, 255, 0.6)" />
+    );
   if (error) return <div className="users_error">{error}</div>;
 
   const formatRoleForDisplay = (role) => {
