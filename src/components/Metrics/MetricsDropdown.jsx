@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState, memo } from 'react';
+import React, { useRef, useState } from 'react';
 import { BodyBase } from '../Typography/Headlines&Texts';
 import styles from './Metrics.module.scss';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
-const METRICS = [
+const availableMetrics = [
   { id: 'spend', label: 'Spend', icon: 'circle-blue' },
   { id: 'impressions', label: 'Impressions', icon: 'circle-green' },
   { id: 'clicks', label: 'Clicks', icon: 'circle-orange' },
@@ -10,49 +11,24 @@ const METRICS = [
   { id: 'cpc', label: 'CPC', icon: 'circle-purple' },
 ];
 
-const MAX_SELECTED = 2;
-
 const MetricsDropdown = ({ selectedMetrics, setSelectedMetrics }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const handleClickOutside = useCallback((event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setShowDropdown(false);
+  useOutsideClick(dropdownRef, () => setShowDropdown(false));
+
+  const toggleMetric = (metricId) => {
+    if (selectedMetrics.includes(metricId)) {
+      setSelectedMetrics(selectedMetrics.filter((id) => id !== metricId));
+    } else if (selectedMetrics.length < 2) {
+      setSelectedMetrics([...selectedMetrics, metricId]);
     }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [handleClickOutside]);
-
-  const toggleMetric = useCallback(
-    (metricId) => {
-      setSelectedMetrics((prev) => {
-        if (prev.includes(metricId)) {
-          return prev.filter((id) => id !== metricId);
-        }
-        return prev.length < MAX_SELECTED ? [...prev, metricId] : prev;
-      });
-    },
-    [setSelectedMetrics]
-  );
-
-  const toggleDropdown = useCallback(() => {
-    setShowDropdown((prev) => !prev);
-  }, []);
-
-  const selectedCount = selectedMetrics.length;
-  const hintText =
-    selectedCount === MAX_SELECTED
-      ? 'Max 2 metrics selected'
-      : `Select ${MAX_SELECTED - selectedCount} more`;
+  };
 
   return (
     <div className={styles.metricsSelector} ref={dropdownRef}>
       <button
-        onClick={toggleDropdown}
+        onClick={() => setShowDropdown(!showDropdown)}
         className={styles.metricsButton}
         aria-expanded={showDropdown}
       >
@@ -66,39 +42,42 @@ const MetricsDropdown = ({ selectedMetrics, setSelectedMetrics }) => {
 
       {showDropdown && (
         <div className={styles.metricsDropdown}>
-          {METRICS.map((metric) => {
-            const isSelected = selectedMetrics.includes(metric.id);
-            return (
-              <div
-                key={metric.id}
-                onClick={() => toggleMetric(metric.id)}
-                className={`${styles.metricItem} ${
-                  isSelected ? styles.selected : ''
-                }`}
-              >
-                <svg width="14" height="15" className={styles.metricIcon}>
-                  <use href={`/sprite.svg#${metric.icon}`} />
+          {availableMetrics.map((metric) => (
+            <div
+              key={metric.id}
+              onClick={() => toggleMetric(metric.id)}
+              className={`${styles.metricItem} ${
+                selectedMetrics.includes(metric.id) ? styles.selected : ''
+              }`}
+            >
+              <svg width="14" height="15" className={styles.metricIcon}>
+                <use href={`/sprite.svg#${metric.icon}`} />
+              </svg>
+              <BodyBase component="span" className={styles.metricLabel}>
+                {metric.label}
+              </BodyBase>
+              <span className={styles.metricDot}>
+                <svg width="9" height="9" className={styles.metricDotSvg}>
+                  <use
+                    href={`/sprite.svg#${
+                      selectedMetrics.includes(metric.id)
+                        ? 'circle-dot-blue'
+                        : 'circle-empty'
+                    }`}
+                  />
                 </svg>
-                <BodyBase component="span" className={styles.metricLabel}>
-                  {metric.label}
-                </BodyBase>
-                <span className={styles.metricDot}>
-                  <svg width="9" height="9" className={styles.metricDotSvg}>
-                    <use
-                      href={`/sprite.svg#${
-                        isSelected ? 'circle-dot-blue' : 'circle-empty'
-                      }`}
-                    />
-                  </svg>
-                </span>
-              </div>
-            );
-          })}
-          <div className={styles.metricHint}>{hintText}</div>
+              </span>
+            </div>
+          ))}
+          <div className={styles.metricHint}>
+            {selectedMetrics.length === 2
+              ? 'Max 2 metrics selected'
+              : `Select ${2 - selectedMetrics.length} more`}
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default memo(MetricsDropdown);
+export default MetricsDropdown;

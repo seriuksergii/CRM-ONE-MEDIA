@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState, memo } from 'react';
+import React, { useCallback, useRef, useState, memo } from 'react';
 import { BodyBase } from '../Typography/Headlines&Texts';
 import styles from './Metrics.module.scss';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const TIME_RANGE_OPTIONS = [
   { id: '7', label: 'Last 7 Days' },
@@ -12,16 +13,7 @@ const TimeRangeDropdown = ({ timeRange, setTimeRange }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const handleClickOutside = useCallback((event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setShowDropdown(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [handleClickOutside]);
+  useOutsideClick(dropdownRef, () => setShowDropdown(false));
 
   const selectTimeRange = useCallback(
     (rangeId) => {

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import dayjs from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -8,6 +8,7 @@ import styles from './Calendar.module.scss';
 import Button from '../Button/Button';
 import MonthView from './MonthView';
 import CalendarToggle from './CalendarToggle';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 dayjs.extend(weekday);
 dayjs.extend(isBetween);
@@ -17,32 +18,47 @@ dayjs.extend(isSameOrBefore);
 const Calendar = () => {
   const [range, setRange] = useState([null, null]);
   const [leftMonth, setLeftMonth] = useState(dayjs().startOf('month'));
-  const [rightMonth, setRightMonth] = useState(dayjs().add(1, 'month').startOf('month'));
+  const [rightMonth, setRightMonth] = useState(
+    dayjs().add(1, 'month').startOf('month')
+  );
   const [isOpen, setIsOpen] = useState(false);
+  const calendarRef = useRef(null);
 
   const today = useMemo(() => dayjs(), []);
 
+  useOutsideClick(calendarRef, () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  });
+
   const handleSelect = useCallback((date) => {
-    setRange(prev => {
+    setRange((prev) => {
       const [start, end] = prev;
       if (!start || (start && end)) return [date, null];
       return date.isBefore(start) ? [date, start] : [start, date];
     });
   }, []);
 
-  const handleLeftMonthChange = useCallback((newMonth) => {
-    setLeftMonth(newMonth);
-    if (newMonth.add(1, 'month').isAfter(rightMonth)) {
-      setRightMonth(newMonth.add(1, 'month'));
-    }
-  }, [rightMonth]);
+  const handleLeftMonthChange = useCallback(
+    (newMonth) => {
+      setLeftMonth(newMonth);
+      if (newMonth.add(1, 'month').isAfter(rightMonth)) {
+        setRightMonth(newMonth.add(1, 'month'));
+      }
+    },
+    [rightMonth]
+  );
 
-  const handleRightMonthChange = useCallback((newMonth) => {
-    setRightMonth(newMonth);
-    if (newMonth.subtract(1, 'month').isBefore(leftMonth)) {
-      setLeftMonth(newMonth.subtract(1, 'month'));
-    }
-  }, [leftMonth]);
+  const handleRightMonthChange = useCallback(
+    (newMonth) => {
+      setRightMonth(newMonth);
+      if (newMonth.subtract(1, 'month').isBefore(leftMonth)) {
+        setLeftMonth(newMonth.subtract(1, 'month'));
+      }
+    },
+    [leftMonth]
+  );
 
   const formatRangeDate = useMemo(() => {
     const [start, end] = range;
@@ -59,11 +75,11 @@ const Calendar = () => {
     return today.format('MMM D, YYYY');
   }, [range, today]);
 
-  const toggleCalendar = useCallback(() => setIsOpen(prev => !prev), []);
+  const toggleCalendar = useCallback(() => setIsOpen((prev) => !prev), []);
 
   return (
-    <div className={styles.calendarContainer}>
-      <CalendarToggle 
+    <div className={styles.calendarContainer} ref={calendarRef}>
+      <CalendarToggle
         isOpen={isOpen}
         formatRangeDate={formatRangeDate}
         toggleCalendar={toggleCalendar}
