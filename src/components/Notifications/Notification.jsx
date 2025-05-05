@@ -61,7 +61,7 @@ const Notification = ({
           <Button
             type="submit"
             text={config.action.text}
-            className="btn white"
+            variant="secondary"
             onClick={config.action.onClick}
           />
         )}

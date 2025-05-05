@@ -138,12 +138,7 @@ const AccountsPage = () => {
         {() => (
           <Form className="add-offer-form">
             <ToggleSwitch name="isSubscribed" disabled={false} />
-            <button
-              type="submit"
-              style={{ padding: '10px', textAlign: 'center' }}
-            >
-              Submit
-            </button>
+            <Button type="submit" variant="primary" text='Submit' />
           </Form>
         )}
       </Formik>
@@ -298,7 +293,7 @@ const AccountsPage = () => {
             ]}
             required
           />
-          <button type="submit">Submit</button>
+          <Button type="submit" variant="secondary" text='Submit' />
         </Form>
       </Formik>
 
@@ -329,6 +324,8 @@ const AccountsPage = () => {
       <Badges type="badges" variant="registration" />
       <Badges type="badges" variant="registrationBlue" />
       <Badges type="badges" variant="system" />
+
+      <Button text="Test Button" />
 
       <Notification variant="small" type="success" count={1} />
       <Notification variant="small" type="warning" count={1} expired={1} />
