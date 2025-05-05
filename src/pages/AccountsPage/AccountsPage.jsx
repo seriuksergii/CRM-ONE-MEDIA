@@ -22,6 +22,7 @@ import Calendar from '../../components/Calendar/Calendar';
 import Dropdown from '../../components/Dropdown/Dropdown';
 import Notification from '../../components/Notifications/Notification';
 import Metrics from '../../components/Metrics/Metrics';
+import Badges from '../../components/Badges/Badges';
 
 const AccountsPage = () => {
   const [activeTab, setActiveTab] = useState('b');
@@ -301,6 +302,34 @@ const AccountsPage = () => {
         </Form>
       </Formik>
 
+      <Badges type="status" variant="active" />
+      <Badges type="status" variant="paused" />
+      <Badges type="status" variant="archived" />
+      <Badges type="status" variant="blocked" />
+      <Badges type="status" variant="completed" />
+      <br></br>
+
+      <Badges type="roles" variant="admin" withIcon={false} />
+      <Badges type="roles" variant="headOfTeam" withIcon={false} />
+      <Badges type="roles" variant="teamLead" withIcon={false} />
+      <Badges type="roles" variant="buyer" withIcon={false} />
+      <Badges type="roles" variant="viewer" withIcon={false} />
+      <Badges type="roles" variant="prostateHealth" withIcon={false} />
+      <br></br>
+      <Badges type="tokenStatus" variant="tokenValid" />
+      <Badges type="tokenStatus" variant="tokenExpiringSoon" />
+      <Badges type="tokenStatus" variant="tokenExpired" />
+      <br></br>
+
+      <Badges type="badges" variant="error" />
+      <Badges type="badges" variant="partnerAdded" />
+      <Badges type="badges" variant="login" />
+      <Badges type="badges" variant="offerUpdated" />
+      <Badges type="badges" variant="success" />
+      <Badges type="badges" variant="registration" />
+      <Badges type="badges" variant="registrationBlue" />
+      <Badges type="badges" variant="system" />
+
       <Notification variant="small" type="success" count={1} />
       <Notification variant="small" type="warning" count={1} expired={1} />
       <Notification variant="small" type="neutral" count={1} />
@@ -312,7 +341,7 @@ const AccountsPage = () => {
       <Notification variant="big" type="error" />
 
       <Notification variant="action" type="enable2fa" />
-      <Metrics /> 
+      <Metrics />
     </div>
   );
 };
