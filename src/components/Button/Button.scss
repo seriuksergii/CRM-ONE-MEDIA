@@ -1,29 +1,39 @@
 @use '../../assets/variable.scss' as *;
 
 button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    text-align: inherit;
-    text-decoration: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .btn {
-   background-color: $blue;
-    font: 400 14px / 20px 'Inter', sans-serif;
-   color: $white;
-    padding: 10px 16px;
-    border-radius: 10px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
+  font: 400 14px / 20px 'Inter', sans-serif;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  transition: all 0.3s ease;
+  width: fit-content;
+  min-width: min-content;
+
+  &.primary {
+    background-color: $blue;
+    color: $white;
     stroke: $white;
-    &.white {
-        background-color: $white;
-        border: 1px solid $border;
-        color: $text-primary;
-        stroke: $text-primary;
-    }
+    border: none;
+  }
+
+  &.secondary {
+    background-color: #fff;
+    border: 1px solid $border;
+    color: $text-primary;
+    stroke: $text-primary;
+  }
 }

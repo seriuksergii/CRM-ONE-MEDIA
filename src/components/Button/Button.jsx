@@ -3,34 +3,30 @@ import { Link } from 'react-router-dom';
 import './Button.scss';
 
 export default function Button({
-  className,
+  className = '',
   iconLeft = false,
-
-  IconClassLeft = "",
-  text = "",
-  iconRight = "",
-  IconClassRight = "",
+  IconClassLeft = '',
+  text = '',
+  iconRight = '',
+  IconClassRight = '',
   onClick,
-  type = "button",
-
+  type = 'button',
   isActive = false,
   ariaLabel = false,
-  to, // пропс для ссылки
+  to,
+  variant = 'primary',
 }) {
   const Component = to ? Link : 'button';
   return (
     <Component
       type={type}
-      className={`btn ${className ? className : ''} ${
-        isActive ? 'active' : ''
-      }`}
+      className={`btn ${variant} ${className} ${isActive ? 'active' : ''}`}
       onClick={onClick}
       to={to}
       aria-label={ariaLabel}
     >
       {iconLeft && <Icon name={iconLeft} className={IconClassLeft} />}
       {text && <span>{text}</span>}
-
       {iconRight && <Icon className={IconClassRight} name={iconRight} />}
     </Component>
   );

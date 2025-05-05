@@ -126,8 +126,8 @@ const AddNewUser = ({
                 <Button
                   type="button"
                   text="Cancel"
+                  variant="secondary"
                   onClick={onClose}
-                  className="white"
                   disabled={isSubmitting}
                 />
                 <Button
