@@ -7,9 +7,13 @@ import * as Yup from 'yup';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import InputField from '../../components/InputField/InputField';
 import { translateError } from '../../utils/translateError';
-import { HeadingXL, HeadingMD } from '../../components/Typography/Headlines&Texts';
+import {
+  HeadingXL,
+  HeadingMD,
+} from '../../components/Typography/Headlines&Texts';
 import './RegisterPage.scss';
 import '../../styles/authStyles.css';
+import Loader from '../../components/Loader/Loader';
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -123,6 +127,7 @@ const RegisterPage = () => {
 
   return (
     <div className="auth-container">
+      {isLoading && <Loader color="#0066CC" bgColor="rgba(0, 0, 0, 0.7)" />}
       <div className="login_page">
         <div className="login_page_title_block">
           <img src="/Mask group.png" alt="logo" className="logo" />
